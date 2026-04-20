@@ -1,0 +1,8 @@
+{
+  "name": "sf-top100",
+  "private": true,
+  "scripts": {
+    "dist": "node scripts/build-dist.mjs",
+    "pack": "npm run dist && rm -f top100-dist.zip && (cd dist && zip -qr ../top100-dist.zip .) && echo Wrote top100-dist.zip"
+  }
+}
