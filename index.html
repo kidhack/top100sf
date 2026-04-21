@@ -88,7 +88,10 @@
     background: rgba(255, 255, 255, 0.95);
     border: none;
     border-radius: 8px;
-    max-width: min(320px, calc(100% - 24px));
+    /* Reserve room for the .info overlay on the left:
+       12px gutter + 284px outer width + 12px gap = 308px,
+       plus the 12px right gutter the panel itself sits in. */
+    max-width: min(320px, calc(100% - 320px));
     flex-wrap: wrap;
     justify-content: flex-end;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
@@ -407,10 +410,11 @@
       width: 100%;
       border-bottom: 1px solid var(--border);
     }
+    .map-auth,
     .view-banner {
       max-width: calc(100% - 24px);
     }
-    body.viewing .info {
+    .info {
       top: 60px;
     }
     .list {
