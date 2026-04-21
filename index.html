@@ -140,6 +140,8 @@
   tbody tr {
     cursor: pointer;
     transition: background 0.08s ease;
+    /* Keep rows from hiding under the sticky thead when scrollIntoView runs. */
+    scroll-margin-top: 38px;
   }
   tbody tr:hover { background: var(--hover); }
   tbody tr.selected {
