@@ -1,4 +1,35 @@
-<h2>Magic Link</h2>
-
-<p>Follow this link to login:</p>
-<p><a href="{{ .ConfirmationURL }}">Log In</a></p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fafafa;padding:32px 16px;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#111;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="480" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;background:#ffffff;border:1px solid #eaeaea;border-radius:10px;overflow:hidden;">
+        <tr>
+          <td style="padding:28px 32px 8px 32px;">
+            <p style="margin:0 0 4px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#777;">SF Top 100 · 2026</p>
+            <h1 style="margin:0;font-size:22px;line-height:1.25;font-weight:600;color:#111;">Sign in to your list</h1>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:12px 32px 8px 32px;font-size:14px;line-height:1.55;color:#333;">
+            <p style="margin:0 0 16px 0;">Tap the button below to sign in and sync your visited restaurants and hearts across devices.</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" style="padding:8px 32px 24px 32px;">
+            <a href="{{ .ConfirmationURL }}"
+               style="display:inline-block;background:#111;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:11px 20px;border-radius:6px;">
+              Sign in to SF Top 100
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 32px 24px 32px;font-size:12px;line-height:1.55;color:#777;">
+            <p style="margin:0 0 8px 0;">Or paste this link into your browser:</p>
+            <p style="margin:0 0 16px 0;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#111;text-decoration:underline;">{{ .ConfirmationURL }}</a></p>
+            <p style="margin:0;color:#999;">This link will expire shortly. If you didn't request it, you can safely ignore this email.</p>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:16px 0 0 0;font-size:11px;color:#999;">SF Chronicle Top 100 Restaurants tracker · Bay Area</p>
+    </td>
+  </tr>
+</table>
