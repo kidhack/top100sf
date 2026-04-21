@@ -624,8 +624,6 @@ textarea.list-items-textarea {
   min-height: 110px;
   max-height: min(36vh, 320px);
   resize: vertical;
-}
-.list-items-cm-host {
   width: 100%;
   box-sizing: border-box;
 }

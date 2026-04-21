@@ -1699,20 +1699,13 @@ const JSON_TEMPLATE = JSON.stringify([
 
 const newListDialog = document.getElementById('new-list-dialog');
 const newListBody = document.getElementById('new-list-body');
-/** CodeMirror teardown for the list JSON field (set when the editor mounts). */
-let listDataEditorDestroy = null;
-/** Cleared when the list modal body is re-rendered or the editor is disposed. */
+/** Cleared when the list modal body is re-rendered. */
 let listModalNameBlurTimer = null;
 
 function disposeListDataEditor() {
   if (listModalNameBlurTimer != null) {
     clearTimeout(listModalNameBlurTimer);
     listModalNameBlurTimer = null;
-  }
-  try {
-    listDataEditorDestroy?.();
-  } finally {
-    listDataEditorDestroy = null;
   }
 }
 
@@ -2360,7 +2353,7 @@ async function renderListDialog({ mode, list = null, items = [] }) {
             <input type="file" id="csv-file-input" accept=".csv,text/csv" hidden>
           </div>
         </div>
-        <div id="list-items-root" class="list-items-cm-host"></div>
+        <textarea id="list-items" class="list-items-textarea" name="items" required rows="14" aria-labelledby="list-data-label-text" spellcheck="false"></textarea>
       </div>
       <div class="parse-summary" id="parse-summary" hidden></div>
       <div class="menu-form-actions">
@@ -2382,58 +2375,10 @@ async function renderListDialog({ mode, list = null, items = [] }) {
   const csvTemplateDownloadBtn = newListBody.querySelector('#csv-template-download');
   const csvUploadTriggerBtn = newListBody.querySelector('#csv-upload-trigger');
   const csvFileInput = newListBody.querySelector('#csv-file-input');
-  const itemsRoot = newListBody.querySelector('#list-items-root');
-
-  const itemsDocListeners = [];
-  function emitListDataInput() {
-    for (const fn of itemsDocListeners) {
-      try {
-        fn({ type: 'input' });
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }
-
-  /** @type {HTMLTextAreaElement | { value: string, addEventListener: Function, dispatchEvent: Function, focus?: Function }} */
-  let itemsInput;
-  try {
-    const { mountListJsonEditor } = await import('./list-items-editor.js');
-    const ed = mountListJsonEditor(itemsRoot, {
-      doc: initialJson,
-      placeholder: JSON_TEMPLATE,
-      labelId: 'list-data-label-text',
-      onDocChange: emitListDataInput,
-    });
-    listDataEditorDestroy = () => ed.destroy();
-    itemsInput = {
-      get value() {
-        return ed.getValue();
-      },
-      set value(v) {
-        ed.setValue(v);
-      },
-      addEventListener(type, fn) {
-        if (type === 'input') itemsDocListeners.push(fn);
-      },
-      dispatchEvent(e) {
-        if (e?.type === 'input') emitListDataInput();
-      },
-      focus: () => ed.focus(),
-    };
-  } catch (err) {
-    console.error('List data editor failed to load', err);
-    alert('Could not load the code editor. Try refreshing the page.');
-    const ta = document.createElement('textarea');
-    ta.id = 'list-items';
-    ta.className = 'list-items-textarea';
-    ta.name = 'items';
-    ta.placeholder = JSON_TEMPLATE;
-    ta.value = initialJson;
-    ta.required = true;
-    itemsRoot.replaceWith(ta);
-    itemsInput = ta;
-  }
+  /** @type {HTMLTextAreaElement} */
+  const itemsInput = newListBody.querySelector('#list-items');
+  itemsInput.placeholder = JSON_TEMPLATE;
+  itemsInput.value = initialJson;
 
   let parsedRows = isEdit
     ? items.map((it, i) => ({
