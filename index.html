@@ -129,11 +129,13 @@
     /* Reserve room for the .info overlay on the left:
        12px gutter + 284px outer width + 12px gap = 308px,
        plus the 12px right gutter the panel itself sits in. */
+    width: fit-content;
     max-width: min(320px, calc(100% - 320px));
     flex-wrap: wrap;
     justify-content: flex-end;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
   }
+  .map-auth .label-short { display: none; }
   #auth { box-sizing: content-box; }
   .app {
     display: flex;
@@ -496,7 +498,21 @@
       padding: 6px;
     }
     .map-auth .email-btn {
-      max-width: clamp(72px, 26vw, 120px);
+      max-width: clamp(60px, 22vw, 100px);
+    }
+    /* Swap long labels for short ones on mobile so the panel can hug content. */
+    .map-auth .label-long { display: none; }
+    .map-auth .label-short { display: inline; }
+    .map-auth button { padding: 4px 8px; }
+    .map-auth .share-url {
+      flex: 1 1 80px;
+      padding: 3px 6px;
+    }
+    .map-auth input#email-input {
+      width: auto;
+      flex: 1 1 120px;
+      min-width: 0;
+      padding: 3px 6px;
     }
     .info {
       top: 12px;
@@ -883,7 +899,7 @@ const authEl = document.getElementById('auth');
 function renderAuthSignedIn() {
   authEl.innerHTML = `
     <button id="email-btn" class="email-btn" type="button" title="Click to sign out"></button>
-    <button id="share-btn" type="button" aria-pressed="false" aria-expanded="false" aria-controls="share-section">Share My List</button>
+    <button id="share-btn" type="button" aria-pressed="false" aria-expanded="false" aria-controls="share-section" aria-label="Share My List"><span class="label-long">Share My List</span><span class="label-short">Share</span></button>
     <div class="share-section" id="share-section" hidden>
       <input type="text" class="share-url" id="share-url" readonly aria-label="Shareable link">
       <button id="copy-share" type="button">Copy</button>
@@ -1046,14 +1062,14 @@ async function enterViewingMode(uid) {
 }
 
 function renderAuthSignedOut() {
-  authEl.innerHTML = `<button id="show-signin">Sign in to sync</button>`;
+  authEl.innerHTML = `<button id="show-signin" aria-label="Sign in to sync"><span class="label-long">Sign in to sync</span><span class="label-short">Sign in</span></button>`;
   authEl.querySelector('#show-signin').addEventListener('click', renderAuthForm);
 }
 
 function renderAuthForm() {
   authEl.innerHTML = `
     <input id="email-input" type="email" placeholder="you@example.com" autocomplete="email">
-    <button id="send-link">Send magic link</button>
+    <button id="send-link" aria-label="Send magic link"><span class="label-long">Send magic link</span><span class="label-short">Send</span></button>
     <button id="cancel-signin">Cancel</button>
   `;
   const input = authEl.querySelector('#email-input');
