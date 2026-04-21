@@ -58,11 +58,11 @@ const server = createServer(async (req, res) => {
   // Resolve to the actual file we'll serve so content-type reflects that
   // file's extension (not the URL's), otherwise `/` -> index.html would
   // inherit the directory's empty extension and Chrome forces a download.
-  let filePath = await resolveFile(absPath);
-  // Match production .htaccess: /favicon.ico → favicon.svg
-  if (!filePath && /\/favicon\.ico$/i.test(url.pathname)) {
-    filePath = await resolveFile(join(root, 'favicon.svg'));
-  }
+  // Match production .htaccess: /favicon.ico always maps to favicon.svg so a
+  // stray empty favicon.ico on disk cannot win.
+  let filePath = /\/favicon\.ico$/i.test(url.pathname)
+    ? await resolveFile(join(root, 'favicon.svg'))
+    : await resolveFile(absPath);
   const looksLikeStaticAsset = /\.(js|mjs|css|json|png|jpe?g|gif|svg|ico|woff2?|map|txt)$/i.test(
     safePath,
   );

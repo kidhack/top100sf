@@ -5,15 +5,15 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Must run before the -f pass-through: a stale or empty favicon.ico on disk
+# would otherwise win and browsers get a broken tab icon.
+RewriteRule ^favicon\.ico$ /favicon.svg [L]
+
 # Serve real files (index.html, app.js, styles.css, data/restaurants.js,
 # .htaccess itself, robots.txt, etc.) and real directories as-is.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
-
-# Browsers request /favicon.ico by default; without a file it would fall through
-# to the SPA rule and return HTML. Serve the SVG favicon instead.
-RewriteRule ^favicon\.ico$ /favicon.svg [L]
 
 # Everything else (e.g. /alex, /list/date-nights, /alex/date-nights) is a
 # client-side route. Send it to index.html so app.js can parse the path
