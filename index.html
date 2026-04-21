@@ -70,6 +70,7 @@
     font-size: 12px;
     color: var(--fg-dim);
   }
+  .auth > * { min-width: 0; }
   .auth input {
     font: inherit;
     padding: 4px 8px;
@@ -103,6 +104,8 @@
     padding: 4px 6px;
     border-radius: 4px;
     cursor: pointer;
+    min-width: 0;
+    flex: 0 1 auto;
     max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -487,6 +490,13 @@
          12px gutter + 174px outer width (150 + 24 padding) + 12px gap +
          12px right gutter = 210px. */
       max-width: calc(100% - 210px);
+    }
+    .map-auth {
+      gap: 4px;
+      padding: 6px;
+    }
+    .map-auth .email-btn {
+      max-width: clamp(72px, 26vw, 120px);
     }
     .info {
       top: 12px;
