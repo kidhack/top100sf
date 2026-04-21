@@ -1,2 +1,12 @@
 dist/
 .DS_Store
+.cursor/
+.vscode/
+
+# Supabase CLI
+supabase/.branches
+supabase/.temp
+.env
+.env.local
+.env.*.local
+config.local.js

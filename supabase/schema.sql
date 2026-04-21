@@ -4,12 +4,15 @@
 -- you add a new table below.
 
 -- ---------------------------------------------------------------------------
--- visited: per-user list of restaurant ranks the user has marked visited.
+-- visited: per-user set of restaurant names the user has marked visited.
+-- Keyed on a normalized name so the same restaurant shows as visited across
+-- every list edition it appears on (2026, 2027, …).
 -- ---------------------------------------------------------------------------
 create table if not exists public.visited (
-  user_id uuid not null references auth.users(id) on delete cascade,
-  rank    int  not null,
-  primary key (user_id, rank)
+  user_id  uuid not null references auth.users(id) on delete cascade,
+  name     text not null,
+  name_key text generated always as (lower(btrim(name))) stored,
+  primary key (user_id, name_key)
 );
 
 alter table public.visited enable row level security;
@@ -18,25 +21,39 @@ drop policy if exists "visited read own or shared" on public.visited;
 create policy "visited read own or shared"
   on public.visited for select
   using (
-    -- Owners always see their rows; anyone may read rows belonging to a
-    -- user that has opted into sharing via public_lists.
     auth.uid() = user_id
     or exists (select 1 from public.public_lists pl where pl.user_id = visited.user_id)
+    or exists (select 1 from public.profiles p where p.user_id = visited.user_id)
+    or exists (
+      select 1 from public.lists l
+      where l.owner_id = visited.user_id and l.deleted_at is null
+    )
   );
 
 drop policy if exists "visited write own" on public.visited;
-create policy "visited write own"
-  on public.visited for all
+drop policy if exists "visited insert own" on public.visited;
+create policy "visited insert own"
+  on public.visited for insert
+  with check (auth.uid() = user_id);
+drop policy if exists "visited update own" on public.visited;
+create policy "visited update own"
+  on public.visited for update
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+drop policy if exists "visited delete own" on public.visited;
+create policy "visited delete own"
+  on public.visited for delete
+  using (auth.uid() = user_id);
 
 -- ---------------------------------------------------------------------------
--- hearted: per-user list of restaurant ranks the user has favorited.
+-- hearted: per-user set of restaurant names the user has favorited. Same
+-- shape as `visited` above.
 -- ---------------------------------------------------------------------------
 create table if not exists public.hearted (
-  user_id uuid not null references auth.users(id) on delete cascade,
-  rank    int  not null,
-  primary key (user_id, rank)
+  user_id  uuid not null references auth.users(id) on delete cascade,
+  name     text not null,
+  name_key text generated always as (lower(btrim(name))) stored,
+  primary key (user_id, name_key)
 );
 
 alter table public.hearted enable row level security;
@@ -47,13 +64,27 @@ create policy "hearted read own or shared"
   using (
     auth.uid() = user_id
     or exists (select 1 from public.public_lists pl where pl.user_id = hearted.user_id)
+    or exists (select 1 from public.profiles p where p.user_id = hearted.user_id)
+    or exists (
+      select 1 from public.lists l
+      where l.owner_id = hearted.user_id and l.deleted_at is null
+    )
   );
 
 drop policy if exists "hearted write own" on public.hearted;
-create policy "hearted write own"
-  on public.hearted for all
+drop policy if exists "hearted insert own" on public.hearted;
+create policy "hearted insert own"
+  on public.hearted for insert
+  with check (auth.uid() = user_id);
+drop policy if exists "hearted update own" on public.hearted;
+create policy "hearted update own"
+  on public.hearted for update
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+drop policy if exists "hearted delete own" on public.hearted;
+create policy "hearted delete own"
+  on public.hearted for delete
+  using (auth.uid() = user_id);
 
 -- ---------------------------------------------------------------------------
 -- public_lists: opt-in record indicating a user wants their list shared.

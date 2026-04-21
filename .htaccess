@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Force HTTPS so Supabase magic-link redirects always land on the canonical
+# origin (https://top100sf.com) and the auth state attaches correctly.
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Serve real files (index.html, app.js, styles.css, data/restaurants.js,
+# .htaccess itself, robots.txt, etc.) and real directories as-is.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Everything else (e.g. /alex, /list/date-nights, /alex/date-nights) is a
+# client-side route. Send it to index.html so app.js can parse the path
+# with parseRoute() and load the right list / overlay.
+RewriteRule ^ /index.html [L]
