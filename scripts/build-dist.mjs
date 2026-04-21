@@ -17,7 +17,7 @@ const files = [
   'styles.css',
   'app.js',
   'data/restaurants.js',
-  'og-top-logo.png',
+  'og-social-graph.png',
   '.htaccess',
 ];
 

@@ -1288,9 +1288,6 @@ function renderAuthSignedIn() {
   authEl.innerHTML = `
     <div class="menu-shell" id="menu-shell" data-expanded="false">
       <div class="menu-header">
-        <a class="menu-brand" href="/" aria-label="Top100SF home">
-          <img class="menu-brand-logo" src="/img/top100logo.svg" width="1200" height="675" alt="">
-        </a>
         <span class="menu-list-title" id="menu-list-title" aria-hidden="true"></span>
         <button id="menu-button" class="menu-button" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-body" title="Open menu" aria-label="Open menu">
           ${hamburgerSvg}
@@ -3231,18 +3228,10 @@ async function renderListDialog({ mode, list = null, items = [] }) {
 // All-lists directory (Phase 6)
 //
 // Shows up to 200 active lists with their owner's username and item count.
-// Sorted by total visits (all users): each list_item matched to visited.name_key
-// counts once per user. When the viewer is signed in, also shows their own
-// progress per list.
+// Sorted by aggregate visits (all users): each distinct (user_id, list venue
+// name_key) with a matching visited row counts once. Not shown in the UI.
+// When the viewer is signed in, also shows their own progress per list.
 // ---------------------------------------------------------------------------
-
-function formatAllListsVisitTotal(n) {
-  const x = Number(n) || 0;
-  if (x >= 1_000_000) return `${(x / 1_000_000).toFixed(1)}M visits`;
-  if (x >= 10_000) return `${Math.round(x / 1000)}k visits`;
-  if (x >= 1000) return `${(x / 1000).toFixed(1)}k visits`;
-  return `${x} ${x === 1 ? 'visit' : 'visits'}`;
-}
 const allListsDialog = document.getElementById('all-lists-dialog');
 const allListsBody = document.getElementById('all-lists-body');
 
@@ -3395,6 +3384,7 @@ async function openAllListsDialog() {
 
     // Ensure the site-wide default list is always represented, even if it
     // hasn't been seeded into the `lists` table yet.
+    let syntheticDefaultPlatformVisits = 0;
     if (!lists.some(l => l.slug === DEFAULT_LIST_SLUG)) {
       lists.unshift({
         id: null,
@@ -3402,12 +3392,30 @@ async function openAllListsDialog() {
         name: DEFAULT_LIST_NAME,
         owner_id: null,
       });
+      const keys = DEFAULT_RESTAURANTS.map((r) =>
+        r.name_key != null && String(r.name_key).trim() !== ''
+          ? String(r.name_key).trim()
+          : progressKey(r.name),
+      );
+      const vr = await supabase.rpc('visit_count_for_name_keys', { p_name_keys: keys });
+      if (vr.error) {
+        console.warn(
+          'all-lists: visit_count_for_name_keys failed; default list sorts as 0 visits',
+          vr.error.message || vr.error,
+        );
+      } else {
+        syntheticDefaultPlatformVisits = Number(vr.data) || 0;
+      }
     }
 
+    /** Platform-wide list popularity for sort (not the signed-in user's x/y). */
     function allUsersVisitTotal(list) {
       if (list?.id != null) return visitTotals.get(list.id) || 0;
+      if (list?.slug === DEFAULT_LIST_SLUG && list.id == null) return syntheticDefaultPlatformVisits;
       return 0;
     }
+    // Highest get_list_visit_totals first; tie-break by name. Personal progress
+    // (myProgress) is only shown in each row, never used for ordering.
     lists.sort((a, b) => {
       const d = allUsersVisitTotal(b) - allUsersVisitTotal(a);
       if (d !== 0) return d;
@@ -3429,7 +3437,6 @@ async function openAllListsDialog() {
       const itemCount = isDefault
         ? (counts.get(list.id) || DEFAULT_RESTAURANTS.length)
         : (counts.get(list.id) || 0);
-      const totalVisits = allUsersVisitTotal(list);
       let myProgress = progress.get(list.id) || 0;
       // When the default list isn't seeded in list_items yet, intersect the
       // user's globally-visited name keys against DEFAULT_RESTAURANTS so the
@@ -3451,7 +3458,6 @@ async function openAllListsDialog() {
         </div>
         <div class="all-lists-stats">
           <div class="all-lists-progress${myProgress > 0 ? ' has-progress' : ''}">${myProgress}/${itemCount} visited</div>
-          <div class="all-lists-totalvisits" title="Times any signed-in user marked a venue on this list as visited">${escapeHtml(formatAllListsVisitTotal(totalVisits))}</div>
         </div>
       `;
       const itemNames = (namesByList.get(list.id) || []).map(e => e.name);
