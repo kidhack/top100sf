@@ -347,6 +347,7 @@
   }
   .info .name { font-weight: 600; font-size: 13px; margin-bottom: 2px; color: var(--fg); }
   .info .sub { color: var(--fg-dim); }
+  .info .city { white-space: nowrap; }
 
   .modal {
     border: none;
@@ -731,7 +732,7 @@ function select(rank) {
   info.innerHTML = `
     <div class="name">#${r.rank} · ${escapeHtml(r.name)}</div>
     <div class="sub">${escapeHtml(r.cuisine)}</div>
-    <div class="sub">${escapeHtml(r.address)}, ${escapeHtml(r.city)}</div>
+    <div class="sub">${escapeHtml(r.address)}, <span class="city">${escapeHtml(r.city)}</span></div>
   `;
 }
 
