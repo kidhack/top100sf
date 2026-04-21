@@ -293,11 +293,20 @@
     padding: 4px 6px;
     border: 1px solid var(--border-strong);
     border-radius: 4px;
-    width: 180px;
+    flex: 1 1 160px;
+    min-width: 0;
     color: var(--fg);
     background: var(--bg);
     outline: none;
   }
+  .share-section {
+    flex-basis: 100%;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .share-section[hidden] { display: none; }
 
   .info {
     box-sizing: content-box;
@@ -659,11 +668,64 @@ const authEl = document.getElementById('auth');
 function renderAuthSignedIn() {
   authEl.innerHTML = `
     <span class="email"></span>
-    <button id="share-btn" type="button">Share</button>
+    <button id="share-btn" type="button" aria-pressed="false" aria-expanded="false" aria-controls="share-section">Share</button>
     <button id="sign-out" type="button">Sign out</button>
+    <div class="share-section" id="share-section" hidden>
+      <input type="text" class="share-url" id="share-url" readonly aria-label="Shareable link">
+      <button id="copy-share" type="button">Copy</button>
+    </div>
   `;
   authEl.querySelector('.email').textContent = currentUser?.email || 'signed in';
-  authEl.querySelector('#share-btn').addEventListener('click', openSharePanel);
+
+  const shareBtn = authEl.querySelector('#share-btn');
+  const shareSection = authEl.querySelector('#share-section');
+  const shareInput = authEl.querySelector('#share-url');
+  const copyBtn = authEl.querySelector('#copy-share');
+
+  function setShareOpen(open) {
+    shareSection.hidden = !open;
+    shareBtn.setAttribute('aria-pressed', open ? 'true' : 'false');
+    shareBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  async function openShareSection() {
+    if (!currentUser) return;
+    if (!sharingEnabled) {
+      const { error } = await supabase
+        .from('public_lists')
+        .upsert({ user_id: currentUser.id, display: currentUser.email });
+      if (error) {
+        alert('Could not enable sharing: ' + error.message);
+        return;
+      }
+      sharingEnabled = true;
+    }
+    shareInput.value = shareLinkFor(currentUser.id);
+    setShareOpen(true);
+    setTimeout(() => shareInput.select(), 0);
+  }
+
+  shareBtn.addEventListener('click', () => {
+    if (shareSection.hidden) openShareSection();
+    else setShareOpen(false);
+  });
+
+  shareInput.addEventListener('focus', () => shareInput.select());
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(shareInput.value);
+    } catch {
+      shareInput.select();
+      try { document.execCommand('copy'); } catch {}
+    }
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => {
+      if (copyBtn.isConnected) copyBtn.textContent = 'Copy';
+    }, 1500);
+    setShareOpen(false);
+  });
+
   authEl.querySelector('#sign-out').addEventListener('click', async () => {
     await supabase.auth.signOut();
   });
@@ -675,67 +737,6 @@ function shareLinkFor(uid) {
   u.hash = '';
   u.searchParams.set('u', uid);
   return u.toString();
-}
-
-async function openSharePanel() {
-  if (!currentUser) return;
-  if (!sharingEnabled) {
-    const { error } = await supabase
-      .from('public_lists')
-      .upsert({ user_id: currentUser.id, display: currentUser.email });
-    if (error) {
-      alert('Could not enable sharing: ' + error.message);
-      return;
-    }
-    sharingEnabled = true;
-  }
-  renderSharePanel(shareLinkFor(currentUser.id));
-}
-
-function renderSharePanel(url) {
-  authEl.innerHTML = `
-    <input type="text" class="share-url" id="share-url" readonly>
-    <button id="copy-share" type="button">Copy</button>
-    ${navigator.share ? '<button id="native-share" type="button">Share…</button>' : ''}
-    <button id="stop-share" type="button">Stop sharing</button>
-    <button id="close-share" type="button">Done</button>
-  `;
-  const input = authEl.querySelector('#share-url');
-  input.value = url;
-  input.addEventListener('focus', () => input.select());
-  setTimeout(() => input.select(), 0);
-  authEl.querySelector('#copy-share').addEventListener('click', async () => {
-    const btn = authEl.querySelector('#copy-share');
-    try {
-      await navigator.clipboard.writeText(url);
-    } catch {
-      input.select();
-      try { document.execCommand('copy'); } catch {}
-    }
-    btn.textContent = 'Copied';
-    setTimeout(() => { if (btn.isConnected) btn.textContent = 'Copy'; }, 1500);
-  });
-  if (navigator.share) {
-    authEl.querySelector('#native-share').addEventListener('click', async () => {
-      try {
-        await navigator.share({ title: 'My SF Top 100 list', url });
-      } catch {}
-    });
-  }
-  authEl.querySelector('#stop-share').addEventListener('click', async () => {
-    if (!currentUser) return;
-    const { error } = await supabase
-      .from('public_lists')
-      .delete()
-      .eq('user_id', currentUser.id);
-    if (error) {
-      alert('Could not stop sharing: ' + error.message);
-      return;
-    }
-    sharingEnabled = false;
-    renderAuthSignedIn();
-  });
-  authEl.querySelector('#close-share').addEventListener('click', renderAuthSignedIn);
 }
 
 const viewBanner = document.getElementById('view-banner');
