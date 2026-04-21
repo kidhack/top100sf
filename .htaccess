@@ -11,6 +11,10 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+# Browsers request /favicon.ico by default; without a file it would fall through
+# to the SPA rule and return HTML. Serve the SVG favicon instead.
+RewriteRule ^favicon\.ico$ /favicon.svg [L]
+
 # Everything else (e.g. /alex, /list/date-nights, /alex/date-nights) is a
 # client-side route. Send it to index.html so app.js can parse the path
 # with parseRoute() and load the right list / overlay.
