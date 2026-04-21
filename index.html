@@ -284,13 +284,15 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 8px;
-    max-width: calc(100% - 24px);
+    /* Reserve room for the 12px gutter, the .info overlay (12px padding + 260px content + 12px padding = 284px), and a 12px gap between them. */
+    max-width: calc(100% - 320px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
   }
   .view-banner[hidden] { display: none; }
   body.viewing #auth { display: none; }
-  .view-banner > span { white-space: nowrap; }
+  .view-banner > span { white-space: normal; overflow-wrap: anywhere; }
   .view-banner .viewer-name { font-weight: 600; }
   .view-banner button {
     font: inherit;
@@ -404,6 +406,12 @@
       min-height: 0;
       width: 100%;
       border-bottom: 1px solid var(--border);
+    }
+    .view-banner {
+      max-width: calc(100% - 24px);
+    }
+    body.viewing .info {
+      top: 60px;
     }
     .list {
       flex: 1 1 0;
