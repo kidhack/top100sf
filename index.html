@@ -103,11 +103,13 @@
   }
   .list {
     flex: 0 0 40%;
+    max-width: 420px;
     overflow-y: auto;
     border-right: 1px solid var(--border);
   }
   .map-wrap {
-    flex: 0 0 60%;
+    flex: 1 1 auto;
+    min-width: 0;
     position: relative;
   }
   #map { position: absolute; inset: 0; }
@@ -454,6 +456,7 @@
     }
     .list {
       flex: 1 1 0;
+      max-width: none;
       min-height: 0;
       width: 100%;
       max-height: none;
