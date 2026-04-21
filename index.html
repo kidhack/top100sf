@@ -59,6 +59,23 @@
   .auth button:hover:not(:disabled) { background: var(--hover); }
   .auth button:disabled { opacity: 0.5; cursor: default; }
   .auth .email { color: var(--fg); font-weight: 500; }
+  .auth .email-btn {
+    font: inherit;
+    color: var(--fg);
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background 0.1s ease, color 0.1s ease;
+  }
+  .auth .email-btn:hover { background: var(--hover); color: #c0392b; }
+  .auth .email-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .auth .msg { color: var(--visited); }
   .auth .err { color: #c0392b; }
   .map-auth {
@@ -326,6 +343,44 @@
   .info .name { font-weight: 600; font-size: 13px; margin-bottom: 2px; color: var(--fg); }
   .info .sub { color: var(--fg-dim); }
 
+  .modal {
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    max-width: 320px;
+    width: calc(100% - 32px);
+    color: var(--fg);
+    background: var(--bg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18), 0 4px 10px rgba(0, 0, 0, 0.08);
+    font: inherit;
+  }
+  .modal::backdrop { background: rgba(0, 0, 0, 0.35); }
+  .modal-body {
+    padding: 18px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .modal-text { margin: 0; font-size: 14px; line-height: 1.4; }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal-actions button {
+    font: inherit;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--fg);
+    cursor: pointer;
+    transition: background 0.1s ease;
+  }
+  .modal-actions button:hover { background: var(--hover); }
+  .modal-actions .modal-confirm {
+    border-color: #c0392b;
+    background: #c0392b;
+    color: #fff;
+  }
+  .modal-actions .modal-confirm:hover { background: #a93225; }
+
   @media (max-width: 720px) {
     html, body {
       overflow: hidden;
@@ -385,6 +440,16 @@
     <div class="info" id="info"></div>
   </div>
 </div>
+
+<dialog id="confirm-dialog" class="modal" aria-labelledby="confirm-dialog-text">
+  <form method="dialog" class="modal-body">
+    <p class="modal-text" id="confirm-dialog-text"></p>
+    <div class="modal-actions">
+      <button type="submit" value="cancel" class="modal-cancel">Cancel</button>
+      <button type="submit" value="confirm" class="modal-confirm">Confirm</button>
+    </div>
+  </form>
+</dialog>
 
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
@@ -667,15 +732,15 @@ const authEl = document.getElementById('auth');
 
 function renderAuthSignedIn() {
   authEl.innerHTML = `
-    <span class="email"></span>
+    <button id="email-btn" class="email-btn" type="button" title="Click to sign out"></button>
     <button id="share-btn" type="button" aria-pressed="false" aria-expanded="false" aria-controls="share-section">Share My List</button>
-    <button id="sign-out" type="button">Sign out</button>
     <div class="share-section" id="share-section" hidden>
       <input type="text" class="share-url" id="share-url" readonly aria-label="Shareable link">
       <button id="copy-share" type="button">Copy</button>
     </div>
   `;
-  authEl.querySelector('.email').textContent = currentUser?.email || 'signed in';
+  const emailBtn = authEl.querySelector('#email-btn');
+  emailBtn.textContent = currentUser?.email || 'signed in';
 
   const shareBtn = authEl.querySelector('#share-btn');
   const shareSection = authEl.querySelector('#share-section');
@@ -726,8 +791,38 @@ function renderAuthSignedIn() {
     setShareOpen(false);
   });
 
-  authEl.querySelector('#sign-out').addEventListener('click', async () => {
-    await supabase.auth.signOut();
+  emailBtn.addEventListener('click', async () => {
+    const email = currentUser?.email || 'this account';
+    const ok = await confirmDialog({
+      message: `Sign out of ${email}?`,
+      confirmLabel: 'Sign out',
+    });
+    if (ok) await supabase.auth.signOut();
+  });
+}
+
+const confirmDialogEl = document.getElementById('confirm-dialog');
+const confirmDialogText = document.getElementById('confirm-dialog-text');
+const confirmDialogConfirmBtn = confirmDialogEl.querySelector('.modal-confirm');
+const confirmDialogCancelBtn = confirmDialogEl.querySelector('.modal-cancel');
+
+confirmDialogEl.addEventListener('click', (e) => {
+  if (e.target === confirmDialogEl) confirmDialogEl.close('cancel');
+});
+
+function confirmDialog({ message, confirmLabel = 'Confirm', cancelLabel = 'Cancel' } = {}) {
+  confirmDialogText.textContent = message;
+  confirmDialogConfirmBtn.textContent = confirmLabel;
+  confirmDialogCancelBtn.textContent = cancelLabel;
+  if (typeof confirmDialogEl.showModal === 'function') {
+    confirmDialogEl.showModal();
+  } else {
+    return Promise.resolve(window.confirm(message));
+  }
+  return new Promise((resolve) => {
+    confirmDialogEl.addEventListener('close', () => {
+      resolve(confirmDialogEl.returnValue === 'confirm');
+    }, { once: true });
   });
 }
 
