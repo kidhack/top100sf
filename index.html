@@ -347,6 +347,35 @@
   .info .city { white-space: nowrap; }
   .info .sub a { color: inherit; text-decoration: none; }
 
+  .tooltip-bubble {
+    position: absolute;
+    background: var(--fg);
+    color: #fff;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    pointer-events: none;
+    z-index: 2000;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    transform: translate(-50%, -100%);
+    transition: opacity 0.18s ease;
+  }
+  .tooltip-bubble.visible { opacity: 1; }
+  .tooltip-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    margin-left: -4px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--fg);
+  }
+
   .modal {
     border: none;
     border-radius: 10px;
@@ -751,6 +780,46 @@ saveVisited();
 saveHearted();
 // default selection = first restaurant
 select(RESTAURANTS[0].rank);
+
+function showVisitedHint() {
+  const target = document.querySelector('tbody tr .check');
+  if (!target) return;
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip-bubble';
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.textContent = 'Mark visited';
+  document.body.appendChild(tooltip);
+
+  function position() {
+    const rect = target.getBoundingClientRect();
+    tooltip.style.top = (rect.top + window.scrollY - 6) + 'px';
+    tooltip.style.left = (rect.left + rect.width / 2 + window.scrollX) + 'px';
+  }
+  position();
+  requestAnimationFrame(() => tooltip.classList.add('visible'));
+
+  let dismissed = false;
+  function hide() {
+    if (dismissed) return;
+    dismissed = true;
+    tooltip.classList.remove('visible');
+    setTimeout(() => tooltip.remove(), 200);
+    document.removeEventListener('pointerover', onPointer, true);
+    document.removeEventListener('pointerdown', hide, true);
+    window.removeEventListener('scroll', position, true);
+    window.removeEventListener('resize', position);
+  }
+  function onPointer(e) {
+    const el = e.target.closest && e.target.closest('.icon-btn');
+    if (el && el !== target) hide();
+  }
+  document.addEventListener('pointerover', onPointer, true);
+  document.addEventListener('pointerdown', hide, true);
+  window.addEventListener('scroll', position, true);
+  window.addEventListener('resize', position);
+  setTimeout(hide, 8000);
+}
+setTimeout(showVisitedHint, 400);
 
 // ------- Supabase auth + sync -------
 const authEl = document.getElementById('auth');
