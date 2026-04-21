@@ -111,7 +111,8 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--fg-dim);
-    border-bottom: 1px solid var(--border-strong);
+    border-bottom: none;
+    box-shadow: inset 0 -1px 0 var(--border-strong);
     padding: 10px 12px;
   }
   tbody tr {
@@ -207,14 +208,21 @@
   }
   .leaflet-bar,
   .leaflet-bar a,
-  .leaflet-bar a:hover {
+  .leaflet-bar a:hover,
+  .leaflet-touch .leaflet-bar,
+  .leaflet-touch .leaflet-control-zoom {
     border: none;
   }
   .leaflet-bar a + a { border-top: none; }
   .leaflet-bar {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
   }
-  .leaflet-control-zoom { box-sizing: content-box; border-radius: 8px; border: none; }
+  .leaflet-control-zoom,
+  .leaflet-touch .leaflet-control-zoom {
+    box-sizing: content-box;
+    border-radius: 8px;
+    border: none;
+  }
   .leaflet-control-zoom-in { border-radius: 4px 4px 0 0; }
   .leaflet-control-zoom-out { border-radius: 0 0 4px 4px; }
   .leaflet-control-attribution {
