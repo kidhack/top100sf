@@ -412,10 +412,16 @@
     }
     .map-auth,
     .view-banner {
-      max-width: calc(100% - 24px);
-      top: 120px;
+      top: 12px;
+      /* Reserve space for the .info overlay on the left:
+         12px gutter + 174px outer width (150 + 24 padding) + 12px gap +
+         12px right gutter = 210px. */
+      max-width: calc(100% - 210px);
     }
-    .info { top: 12px; }
+    .info {
+      top: 12px;
+      max-width: 150px;
+    }
     .list {
       flex: 1 1 0;
       min-height: 0;
