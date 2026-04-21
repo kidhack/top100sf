@@ -2,6 +2,7 @@ import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promis
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { applyDotEnvFromRoot, injectGooglePlacesMetaContent } from './places-env-inject.mjs';
+import { bundleListItemsEditor } from './bundle-list-items-editor.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -16,7 +17,6 @@ const files = [
   'index.html',
   'styles.css',
   'app.js',
-  'list-items-editor.js',
   'data/restaurants.js',
   'favicon.svg',
   'og-social-graph.png',
@@ -26,6 +26,10 @@ const files = [
 for (const rel of files) {
   await copyFile(join(root, rel), join(dist, rel));
 }
+
+// Bundle CodeMirror into one file so production does not depend on esm.sh
+// (CSP, ad blockers, or offline CDNs would otherwise break the create/edit modal).
+await bundleListItemsEditor(join(dist, 'list-items-editor.js'));
 
 try {
   const localCfg = join(root, 'config.local.js');
@@ -46,3 +50,4 @@ if (injected !== idxHtml) {
 
 console.log('Wrote dist/:');
 for (const rel of files) console.log('  ' + rel);
+console.log('  list-items-editor.js (bundled)');

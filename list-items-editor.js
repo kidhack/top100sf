@@ -2,17 +2,17 @@
  * JSON editor for the create/edit list modal with basic syntax highlighting.
  * Loaded dynamically from app.js to keep the initial page bundle smaller.
  */
-import { EditorView, keymap, lineNumbers, highlightActiveLine, placeholder, drawSelection } from 'https://esm.sh/@codemirror/view@6.35.3';
-import { EditorState, Compartment } from 'https://esm.sh/@codemirror/state@6.5.0';
-import { defaultKeymap, history, historyKeymap } from 'https://esm.sh/@codemirror/commands@6.6.2';
+import { EditorView, keymap, lineNumbers, highlightActiveLine, placeholder, drawSelection } from '@codemirror/view';
+import { EditorState, Compartment } from '@codemirror/state';
+import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import {
   indentOnInput,
   bracketMatching,
   foldGutter,
   syntaxHighlighting,
   defaultHighlightStyle,
-} from 'https://esm.sh/@codemirror/language@6.10.8';
-import { json } from 'https://esm.sh/@codemirror/lang-json@6.0.1';
+} from '@codemirror/language';
+import { json } from '@codemirror/lang-json';
 
 const editorTheme = EditorView.theme(
   {

@@ -10,3 +10,4 @@ supabase/.temp
 .env.local
 .env.*.local
 config.local.js
+.list-items-editor.bundle.mjs

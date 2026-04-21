@@ -9,12 +9,15 @@ import { readFile, stat } from 'node:fs/promises';
 import { dirname, extname, join, normalize, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { applyDotEnvFromRoot, injectGooglePlacesMetaContent } from './places-env-inject.mjs';
+import { bundleListItemsEditor } from './bundle-list-items-editor.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.argv[2] || process.env.PORT || 8000);
 const rootIndexPath = resolve(root, 'index.html');
+const listEditorBundlePath = join(root, '.list-items-editor.bundle.mjs');
 
 applyDotEnvFromRoot(root);
+await bundleListItemsEditor(listEditorBundlePath, 'silent');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -53,7 +56,8 @@ const server = createServer(async (req, res) => {
   // Strip leading slash and normalize, then rejoin to the root. `normalize`
   // collapses any `..` traversal attempts so requests can't escape the repo.
   const safePath = normalize(url.pathname).replace(/^(\.\.(\/|\\|$))+/, '');
-  const absPath = join(root, safePath);
+  const requestListEditor = /(^|\/)list-items-editor\.js$/i.test(url.pathname);
+  const absPath = requestListEditor ? listEditorBundlePath : join(root, safePath);
 
   // Resolve to the actual file we'll serve so content-type reflects that
   // file's extension (not the URL's), otherwise `/` -> index.html would
@@ -125,6 +129,7 @@ server.on('error', (err) => {
 server.listen(port, () => {
   console.log(`Dev server ready: http://localhost:${port}/`);
   console.log('SPA fallback enabled (unknown paths -> index.html).');
+  console.log('list-items-editor.js is bundled (same as production; no esm.sh).');
   if ((process.env.GOOGLE_PLACES_API_KEY || '').trim()) {
     console.log('Local Places search: GOOGLE_PLACES_API_KEY is set (injected into index.html).');
   } else {

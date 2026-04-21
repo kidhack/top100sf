@@ -8,5 +8,13 @@
     "deploy": "bash scripts/deploy.sh",
     "deploy:dry": "bash scripts/deploy.sh --dry-run",
     "generate:seed": "node scripts/generate-default-list-sql.mjs"
+  },
+  "devDependencies": {
+    "@codemirror/commands": "^6.6.2",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/language": "^6.10.8",
+    "@codemirror/state": "^6.5.0",
+    "@codemirror/view": "^6.35.3",
+    "esbuild": "^0.25.2"
   }
 }
