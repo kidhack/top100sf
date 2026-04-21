@@ -4,7 +4,7 @@
  ╵ ╰─╯╵     ┴╴╰─╯╰─╯   ╰─╯╵
 ```
 
-Simple app to track 2026 SF Chronicle's Top 100 Bay Area restaurants.
+What started as a simple app to track 2026 SF Chronicle's Top 100 Bay Area restaurants, now you can create your own lists of places to visit and favorite.
 
 ## [Top100SF.com](https://top100sf.com)
 
