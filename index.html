@@ -348,6 +348,7 @@
   .info .name { font-weight: 600; font-size: 13px; margin-bottom: 2px; color: var(--fg); }
   .info .sub { color: var(--fg-dim); }
   .info .city { white-space: nowrap; }
+  .info .sub a { color: inherit; text-decoration: none; }
 
   .modal {
     border: none;
@@ -732,8 +733,17 @@ function select(rank) {
   info.innerHTML = `
     <div class="name">#${r.rank} · ${escapeHtml(r.name)}</div>
     <div class="sub">${escapeHtml(r.cuisine)}</div>
-    <div class="sub">${escapeHtml(r.address)}, <span class="city">${escapeHtml(r.city)}</span></div>
+    <div class="sub"><a href="${escapeHtml(mapsUrl(r))}" target="_blank" rel="noopener">${escapeHtml(r.address)}, <span class="city">${escapeHtml(r.city)}</span></a></div>
   `;
+}
+
+function mapsUrl(r) {
+  const isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+  const q = encodeURIComponent(`${r.name}, ${r.address}, ${r.city}`);
+  if (isApple) {
+    return `https://maps.apple.com/?q=${q}&ll=${r.lat},${r.lng}`;
+  }
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
 }
 
 function escapeHtml(s) {
