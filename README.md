@@ -14,7 +14,7 @@ Inspired by [elizabethsiegle/sfchronicle-top-100-restaurants2026](https://github
 
 ### Built with
 
-- Plain HTML + vanilla JS
-- [Leaflet](https://leafletjs.com/) for the map
-- [Supabase](https://supabase.com/) for auth, sync, and sharing
-
+- **Plain HTML + CSS + vanilla JS** — static `index.html` / `app.js` deploy (no React/Vite client bundle)
+- **[Leaflet](https://leafletjs.com/)** — map tiles, markers, and popups
+- **[Supabase](https://supabase.com/)** — Auth, Postgres (`lists`, `list_items`, `visited`, `hearted`), Row Level Security, and RPCs for shared progress
+- **Google Places API** — Text Search when adding venues in the create / edit list modal (key injected at build time or via `config.local.js` / env for local dev)
