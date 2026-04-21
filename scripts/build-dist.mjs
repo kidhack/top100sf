@@ -16,6 +16,7 @@ const files = [
   'index.html',
   'styles.css',
   'app.js',
+  'list-items-editor.js',
   'data/restaurants.js',
   'favicon.svg',
   'og-social-graph.png',
