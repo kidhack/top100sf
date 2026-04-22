@@ -1150,20 +1150,49 @@ textarea.list-items-textarea {
   gap: 6px;
   min-height: 32px;
 }
+/* Match .menu-body (6px) + .menu-item horizontal padding (10px) so the title
+   lines up with menu item labels. No extra right padding — keep the trigger
+   aligned with the collapsed hamburger (same inset from the menu shell). */
+.menu-shell[data-expanded="true"] .menu-header {
+  padding-left: 16px;
+}
 .menu-list-title {
   flex: 1;
   min-width: 0;
   font-size: 13px;
   font-weight: 600;
   color: var(--fg);
-  padding: 0 4px 0 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  padding: 0;
   text-align: left;
 }
 .menu-shell:not([data-expanded="true"]) .menu-list-title {
   display: none;
+}
+/* Single line: clip with a soft mask at the right (near the menu button) so
+   more glyphs stay visible vs. a hard ellipsis. Fade width caps at 2.75rem but
+   shrinks on very narrow headers so the whole title doesn’t wash out. */
+.menu-shell[data-expanded="true"] .menu-list-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    #000 max(0px, calc(100% - min(2.75rem, 35%))),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    #000 max(0px, calc(100% - min(2.75rem, 35%))),
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
 }
 .menu-item {
   font: inherit;
@@ -1336,6 +1365,34 @@ textarea.list-items-textarea {
 .username-display:hover .username-display-hover,
 .username-display:focus-visible .username-display-hover {
   opacity: 1;
+}
+
+/* Desktop: default .map-auth maxes at 320px, which clips the list title in the
+   expanded menu; allow a wider panel while the menu is open (same .info offset). */
+@media (min-width: 721px) {
+  .map-auth:has(.menu-shell[data-expanded="true"]) {
+    max-width: min(400px, calc(100% - 320px));
+  }
+  .menu-shell[data-expanded="true"] {
+    min-width: 240px;
+    max-width: min(400px, calc(100vw - 24px));
+  }
+}
+
+/* ~721–799px: side-by-side list + map, but the map strip is still short. A wide
+   menu + min-width:240px on the shell can exceed .map-auth’s max-width and overlap
+   the .info card — keep the chip and open menu tighter here. */
+@media (min-width: 721px) and (max-width: 799px) {
+  .map-auth {
+    max-width: min(260px, calc(100% - 320px));
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"]) {
+    max-width: min(288px, calc(100% - 320px));
+  }
+  .menu-shell[data-expanded="true"] {
+    min-width: 0;
+    max-width: min(288px, calc(100vw - 24px));
+  }
 }
 
 @media (max-width: 720px) {

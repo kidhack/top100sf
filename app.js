@@ -1449,15 +1449,10 @@ function toggleMenu() {
   else openMenu();
 }
 
-function truncateListName(s, n = 20) {
-  const t = String(s || '');
-  return t.length > n ? t.slice(0, n).trimEnd() + '…' : t;
-}
-
 function setMenuTitle(name) {
   const el = document.getElementById('menu-list-title');
   if (!el) return;
-  el.textContent = truncateListName(name, 20);
+  el.textContent = String(name || '');
 }
 
 function openMenu() {
