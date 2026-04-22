@@ -424,6 +424,26 @@ async function fetchOverlayProgressSet(table, userId, listId, restaurantsForList
   };
 }
 
+/**
+ * In-memory visited/hearted sets store several string variants per restaurant
+ * (see addKeyVariants). Batch upserts must send at most one row per
+ * (user_id, name_key) or Postgres errors: "ON CONFLICT DO UPDATE command cannot
+ * affect row a second time".
+ */
+function dedupeProgressNameRows(userId, keys, nameForKeyFn) {
+  const seen = new Set();
+  const rows = [];
+  for (const k of keys) {
+    const name = nameForKeyFn(k);
+    const nk = progressKey(name);
+    if (!nk) continue;
+    if (seen.has(nk)) continue;
+    seen.add(nk);
+    rows.push({ user_id: userId, name });
+  }
+  return rows;
+}
+
 function nameKeyForRank(rank) {
   const r = restaurants.find(x => x.rank === rank);
   return r ? progressKey(r.name) : null;
@@ -784,6 +804,31 @@ async function toggleHeart(rank) {
     }
   } catch (e) {
     warnVisitedSyncBlocked(e, 'heart sync failed for ' + r.name);
+    if (nowHearted) {
+      removeKeyVariants(hearted, r.name, r.name_key);
+      if (rowEls[rank]) {
+        rowEls[rank].classList.remove('hearted');
+        const hb = rowEls[rank].querySelector('button.heart');
+        if (hb) hb.setAttribute('aria-pressed', 'false');
+      }
+      if (markers[rank]) {
+        const el = markers[rank].getElement();
+        if (el) el.querySelector('.pin').classList.remove('hearted');
+      }
+      saveHearted();
+    } else {
+      addKeyVariants(hearted, r.name);
+      if (rowEls[rank]) {
+        rowEls[rank].classList.add('hearted');
+        const hb = rowEls[rank].querySelector('button.heart');
+        if (hb) hb.setAttribute('aria-pressed', 'true');
+      }
+      if (markers[rank]) {
+        const el = markers[rank].getElement();
+        if (el) el.querySelector('.pin').classList.add('hearted');
+      }
+      saveHearted();
+    }
   }
 }
 
@@ -865,6 +910,26 @@ async function toggleVisited(rank) {
     }
   } catch (e) {
     warnVisitedSyncBlocked(e, 'visited sync failed for ' + r.name);
+    // Optimistic UI ran before the DB round-trip. Without a rollback, the row
+    // stays "visited" (heart button appears) even when `visited` never saved —
+    // then hearts can persist while visits stay empty for shared URLs.
+    if (nowVisited) {
+      removeKeyVariants(visited, r.name, r.name_key);
+      if (rowEls[rank]) rowEls[rank].classList.remove('visited');
+      if (markers[rank]) {
+        const el = markers[rank].getElement();
+        if (el) el.querySelector('.pin').classList.remove('visited');
+      }
+      saveVisited();
+    } else {
+      addKeyVariants(visited, r.name);
+      if (rowEls[rank]) rowEls[rank].classList.add('visited');
+      if (markers[rank]) {
+        const el = markers[rank].getElement();
+        if (el) el.querySelector('.pin').classList.add('visited');
+      }
+      saveVisited();
+    }
   }
 }
 
@@ -1091,8 +1156,10 @@ async function loadOverlay() {
       // list (or the default seed) so the stored `name` column is readable.
       // Runs for every route where the overlay is the signed-in user (not only `/`),
       // so in-memory progress from `/` is not cleared when opening `/username`.
-      const visitLocalOnly = remoteVisited !== null ? [...visited].filter(k => !remoteVisited.has(k)) : [];
-      const heartLocalOnly = remoteHearted !== null ? [...hearted].filter(k => !remoteHearted.has(k)) : [];
+      // When the remote fetch failed (`null`), still try to push local keys — otherwise
+      // a transient outage permanently skips the first cloud sync for that session.
+      const visitLocalOnly = remoteVisited !== null ? [...visited].filter(k => !remoteVisited.has(k)) : [...visited];
+      const heartLocalOnly = remoteHearted !== null ? [...hearted].filter(k => !remoteHearted.has(k)) : [...hearted];
       const rowMatchesKey = (x, kk) => {
         const kkt = String(kk).trim();
         if (!kkt) return false;
@@ -1116,11 +1183,15 @@ async function loadOverlay() {
           || DEFAULT_RESTAURANTS.find(x => rowMatchesKey(x, kk));
         return r && listMeta.id ? { user_id: currentUser.id, list_id: listMeta.id, rank: r.rank } : null;
       };
-      if (remoteVisited !== null && visitLocalOnly.length) {
-        const rows = visitLocalOnly.map(k => ({ user_id: currentUser.id, name: nameForKey(k) }));
+      if (visitLocalOnly.length) {
+        const rows = dedupeProgressNameRows(currentUser.id, visitLocalOnly, nameForKey);
         let { error } = await supabase.from('visited').upsert(rows, { onConflict: 'user_id,name_key' });
         if (error && isMissingProgressColumnError(error) && listMeta.id) {
-          const leg = visitLocalOnly.map(rankRowForKey).filter(Boolean);
+          const legMap = new Map();
+          for (const r of visitLocalOnly.map(rankRowForKey).filter(Boolean)) {
+            legMap.set(`${r.list_id}\0${r.rank}`, r);
+          }
+          const leg = [...legMap.values()];
           if (leg.length) ({ error } = await supabase.from('visited').upsert(leg, { onConflict: 'user_id,list_id,rank' }));
         }
         if (error) {
@@ -1128,11 +1199,15 @@ async function loadOverlay() {
           else console.warn('local visited upload skipped:', error.message);
         }
       }
-      if (remoteHearted !== null && heartLocalOnly.length) {
-        const rows = heartLocalOnly.map(k => ({ user_id: currentUser.id, name: nameForKey(k) }));
+      if (heartLocalOnly.length) {
+        const rows = dedupeProgressNameRows(currentUser.id, heartLocalOnly, nameForKey);
         let { error } = await supabase.from('hearted').upsert(rows, { onConflict: 'user_id,name_key' });
         if (error && isMissingProgressColumnError(error) && listMeta.id) {
-          const leg = heartLocalOnly.map(rankRowForKey).filter(Boolean);
+          const legMap = new Map();
+          for (const r of heartLocalOnly.map(rankRowForKey).filter(Boolean)) {
+            legMap.set(`${r.list_id}\0${r.rank}`, r);
+          }
+          const leg = [...legMap.values()];
           if (leg.length) ({ error } = await supabase.from('hearted').upsert(leg, { onConflict: 'user_id,list_id,rank' }));
         }
         if (error) {
