@@ -1,8 +1,6 @@
-```
-╶┬╴╭─╮╭─╮  ╶╮ ╭─╮╭─╮   ╭─╮╭─╴
- │ │ │├─╯   │ ││││││   ╰─╮├╴
- ╵ ╰─╯╵     ┴╴╰─╯╰─╯   ╰─╯╵
-```
+<figure>
+    <img src="https://top100sf.com/img/top.png" width="33%">
+</figure>
 
 What started as an app to track [2026 SF Chronicle's Top 100 Bay Area restaurants](https://www.sfchronicle.com/projects/2026/top-100-best-restaurants-san-francisco-bay-area/) now allows users to create new lists, track visits & favorites, and share your status.
 
@@ -44,3 +42,10 @@ Inspired by [elizabethsiegle/sfchronicle-top-100-restaurants2026](https://github
 - **[Leaflet](https://leafletjs.com/)** — map tiles, markers, and popups
 - **[Supabase](https://supabase.com/)** — Auth, Postgres, Row Level Security, and RPCs
 - **Google Places API** — For adding venues
+
+
+```
+╶┬╴╭─╮╭─╮  ╶╮ ╭─╮╭─╮   ╭─╮╭─╴
+ │ │ │├─╯   │ ││││││   ╰─╮├╴
+ ╵ ╰─╯╵     ┴╴╰─╯╰─╯   ╰─╯╵
+```
