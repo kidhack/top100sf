@@ -12,9 +12,8 @@ on:
       - '.cursor/**'
   workflow_dispatch:
 
-concurrency:
-  group: deploy-dreamhost
-  cancel-in-progress: false
+# No concurrency lock: a stuck “queued” run was blocking all later deploys for
+# this group (cancel-in-progress does not clear queued). Rsync races are rare.
 
 jobs:
   deploy:
