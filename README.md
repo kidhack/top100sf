@@ -4,9 +4,9 @@
  ╵ ╰─╯╵     ┴╴╰─╯╰─╯   ╰─╯╵
 ```
 
-What started as a simple app to track visits to [2026 SF Chronicle's Top 100 Bay Area restaurants](https://www.sfchronicle.com/projects/2026/top-100-best-restaurants-san-francisco-bay-area/), now allows you to create your own lists, track visits and favorites, and share your progress.
+What started as an app to track [2026 SF Chronicle's Top 100 Bay Area restaurants](https://www.sfchronicle.com/projects/2026/top-100-best-restaurants-san-francisco-bay-area/) now allows you to create your own lists, track visits & favorites, and share your status.
 
-## [Top100SF.com](https://top100sf.com)
+## 🍽️ → [Top100SF.com](https://top100sf.com)
 
 Lists can created by adding places individually via search or in bulk by pasting formatted JSON or CSV.
 
