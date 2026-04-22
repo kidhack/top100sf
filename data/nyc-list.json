@@ -1,0 +1,1804 @@
+[
+  {
+    "rank": 1,
+    "name": "Sunn's",
+    "slug": "sunn-s",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": "Chinatown",
+    "address": "139 Division St, New York, NY",
+    "full_address": "139 Division St, New York, NY, 10002, US",
+    "lat": 40.714421,
+    "lng": -73.990962,
+    "cuisine": "Chinese",
+    "url": "https://sunnsnyc.com",
+    "sources": [
+      "eater",
+      "winechef"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 2,
+    "name": "Via Carota",
+    "slug": "via-carota",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "51 Grove St, New York",
+    "full_address": "51 Grove St, New York",
+    "lat": 40.733152,
+    "lng": -74.003638,
+    "cuisine": "Italian",
+    "url": "http://viacarota.com",
+    "sources": [
+      "foursquare",
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 3,
+    "name": "Le Bernardin",
+    "slug": "le-bernardin",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "155 West 51st Street, New York, New York",
+    "full_address": "155 West 51st Street, New York, New York 10019",
+    "lat": 40.761603,
+    "lng": -73.981564,
+    "cuisine": "French",
+    "url": "https://www.le-bernardin.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 4,
+    "name": "Dante NYC",
+    "slug": "dante-nyc",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "79 MacDougal St (btwn W Houston & Bleecker St), New York",
+    "full_address": "79 MacDougal St (btwn W Houston & Bleecker St), New York",
+    "lat": 40.728848204356,
+    "lng": -74.001772000455,
+    "cuisine": "Italian",
+    "url": "http://www.dante-nyc.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 5
+  },
+  {
+    "rank": 5,
+    "name": "Jean-Georges",
+    "slug": "jean-georges",
+    "location": null,
+    "city": null,
+    "neighborhood": "Upper West Side",
+    "address": "Upper West Side, 1 Central Park West",
+    "full_address": "Upper West Side, 1 Central Park West",
+    "lat": 40.769039,
+    "lng": -73.981606,
+    "cuisine": "French",
+    "url": "http://www.jean-georgesrestaurant.com/jean-georges/",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 6,
+    "name": "The Modern",
+    "slug": "the-modern",
+    "location": null,
+    "city": null,
+    "neighborhood": "Midtown",
+    "address": "Midtown, 9 West 53rd Street",
+    "full_address": "Midtown, 9 West 53rd Street",
+    "lat": 40.761085,
+    "lng": -73.976672,
+    "cuisine": "American",
+    "url": "https://www.themodernnyc.com/the-modern/",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 7,
+    "name": "L'Industrie Pizzeria",
+    "slug": "l-industrie-pizzeria",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "254 S 2nd St, Brooklyn, NY",
+    "full_address": "254 S 2nd St, Brooklyn, NY, 11211, US",
+    "lat": 40.711477,
+    "lng": -73.957813,
+    "cuisine": "Italian",
+    "url": "http://www.lindustriebk.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 8,
+    "name": "Lilia",
+    "slug": "lilia",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "567 Union Ave, Brooklyn, NY",
+    "full_address": "567 Union Ave, Brooklyn, NY, 11211, US",
+    "lat": 40.717564,
+    "lng": -73.95242,
+    "cuisine": "Italian",
+    "url": "http://www.lilianewyork.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 9,
+    "name": "Odo",
+    "slug": "odo",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "17 East 13th Street",
+    "full_address": "17 East 13th Street",
+    "lat": 40.7242106524,
+    "lng": -73.9829575191,
+    "cuisine": "Japanese",
+    "url": "http://www.odo.nyc",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 10,
+    "name": "Gabriel Kreuther",
+    "slug": "gabriel-kreuther",
+    "location": null,
+    "city": null,
+    "neighborhood": "Midtown",
+    "address": "Midtown, 41 West 42nd",
+    "full_address": "Midtown, 41 West 42nd",
+    "lat": 40.754458,
+    "lng": -73.982523,
+    "cuisine": "French",
+    "url": "https://www.gknyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 11,
+    "name": "Russ & Daughters Cafe",
+    "slug": "russ-daughters-cafe",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "127 Orchard St (btwn Rivington St & Delancey St), New York",
+    "full_address": "127 Orchard St (btwn Rivington St & Delancey St), New York",
+    "lat": 40.719651,
+    "lng": -73.989657,
+    "cuisine": "Café",
+    "url": "https://russanddaughterscafe.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 12,
+    "name": "Le Veau d'Or",
+    "slug": "le-veau-d-or",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "129 East 60th Street, Manhattan",
+    "full_address": "129 East 60th Street, Manhattan",
+    "lat": 40.763203697634,
+    "lng": -73.968106002532,
+    "cuisine": "French",
+    "url": "http://lvdnyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.8
+  },
+  {
+    "rank": 13,
+    "name": "Ikigai",
+    "slug": "ikigai",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Fort Greene",
+    "address": "Fort Greene, 87 Lafayette Avenue, Brooklyn",
+    "full_address": "Fort Greene, 87 Lafayette Avenue, Brooklyn",
+    "lat": 40.687336,
+    "lng": -73.97488,
+    "cuisine": "Japanese",
+    "url": "http://ikigai.nyc",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.9
+  },
+  {
+    "rank": 14,
+    "name": "Una Pizza Napoletana",
+    "slug": "una-pizza-napoletana",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "175 Orchard St, New York, NY",
+    "full_address": "175 Orchard St, New York, NY, 10002, US",
+    "lat": 40.721742,
+    "lng": -73.988648,
+    "cuisine": "Italian",
+    "url": "https://unapizza.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 15,
+    "name": "Rolo's",
+    "slug": "rolo-s",
+    "location": "Queens",
+    "city": "Queens",
+    "neighborhood": null,
+    "address": "853 Onderdonk Avenue, Queens, NY",
+    "full_address": "853 Onderdonk Avenue, Queens, NY 11385",
+    "lat": 40.701953,
+    "lng": -73.903523,
+    "cuisine": "Italian",
+    "url": "http://www.rolosnyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 16,
+    "name": "Markette",
+    "slug": "markette",
+    "location": null,
+    "city": null,
+    "neighborhood": "Chelsea",
+    "address": "Chelsea, 326 7th Avenue",
+    "full_address": "Chelsea, 326 7th Avenue",
+    "lat": 40.747613,
+    "lng": -73.993484,
+    "cuisine": "European Caribbean",
+    "url": "https://marketterestaurant.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 17,
+    "name": "Dame",
+    "slug": "dame",
+    "location": null,
+    "city": null,
+    "neighborhood": "West Village",
+    "address": "West Village, 87 Macdougal Street",
+    "full_address": "West Village, 87 Macdougal Street",
+    "lat": 40.728936,
+    "lng": -74.001504,
+    "cuisine": "Seafood",
+    "url": "http://www.damenewyork.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 18,
+    "name": "Balthazar",
+    "slug": "balthazar",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "80 Spring St, New York, NY",
+    "full_address": "80 Spring St, New York, NY, 10012, US",
+    "lat": 40.722634,
+    "lng": -73.998281,
+    "cuisine": "French",
+    "url": "http://www.balthazarny.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 19,
+    "name": "The Four Horsemen",
+    "slug": "the-four-horsemen",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "295 Grand Street, Brooklyn, NY",
+    "full_address": "295 Grand Street, Brooklyn, NY, 11211",
+    "lat": 40.713043,
+    "lng": -73.957302,
+    "cuisine": "American",
+    "url": "http://fourhorsemenbk.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 20,
+    "name": "Haenyeo",
+    "slug": "haenyeo",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Park Slope",
+    "address": "239 Fifth Avenue, Brooklyn",
+    "full_address": "239 Fifth Avenue, Brooklyn",
+    "lat": 40.675175,
+    "lng": -73.981088,
+    "cuisine": "Korean",
+    "url": "https://haenyeobk.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 21,
+    "name": "Charles Pan-Fried Chicken",
+    "slug": "charles-pan-fried-chicken",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "439 W 125th St, New York, NY",
+    "full_address": "439 W 125th St, New York, NY, 10027, US",
+    "lat": 40.812565,
+    "lng": -73.955323,
+    "cuisine": "American",
+    "url": "http://charlespanfriedchicken.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 22,
+    "name": "Claud",
+    "slug": "claud",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "90 E 10th St, New York, NY",
+    "full_address": "90 E 10th St, New York, NY, 10003, US",
+    "lat": 40.730858,
+    "lng": -73.98969,
+    "cuisine": "French",
+    "url": "http://claudnyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 23,
+    "name": "Penny",
+    "slug": "penny",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "East Village, 90 East 10th Street",
+    "full_address": "East Village, 90 East 10th Street",
+    "lat": 40.730889365417,
+    "lng": -73.989677752363,
+    "cuisine": "Seafood",
+    "url": "http://penny-nyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 24,
+    "name": "Kabawa",
+    "slug": "kabawa",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "8 Extra Pl, New York, NY",
+    "full_address": "8 Extra Pl, New York, NY, 10003, US",
+    "lat": 40.724671766521,
+    "lng": -73.991511023199,
+    "cuisine": "Caribbean",
+    "url": "https://www.momofuku.com/restaurants/kabawa",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 25,
+    "name": "Ramen Ishida",
+    "slug": "ramen-ishida",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "122 Ludlow St, New York",
+    "full_address": "122 Ludlow St, New York",
+    "lat": 40.719642,
+    "lng": -73.98836,
+    "cuisine": "Ramen",
+    "url": "https://www.ramenishida.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 26,
+    "name": "Superiority Burger",
+    "slug": "superiority-burger",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "119 Avenue A, Manhattan, NY",
+    "full_address": "119 Avenue A, Manhattan, NY 10009",
+    "lat": 40.726475,
+    "lng": -73.983497,
+    "cuisine": "American",
+    "url": "http://www.superiorityburger.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 27,
+    "name": "The Dead Rabbit",
+    "slug": "the-dead-rabbit",
+    "location": null,
+    "city": null,
+    "neighborhood": "Financial District",
+    "address": "30 Water Street",
+    "full_address": "30 Water Street",
+    "lat": 40.703278,
+    "lng": -74.011021,
+    "cuisine": "Irish",
+    "url": "https://thedeadrabbit.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 28,
+    "name": "Golden Diner",
+    "slug": "golden-diner",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "123 Madison St, New York, NY",
+    "full_address": "123 Madison St, New York, NY, 10002, US",
+    "lat": 40.712438533414,
+    "lng": -73.994092836042,
+    "cuisine": "American",
+    "url": "http://www.goldendinerny.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 29,
+    "name": "Rezdôra",
+    "slug": "rezdora",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "27 E 20th St (Broadway & Park Avenue South), New York",
+    "full_address": "27 E 20th St (Broadway & Park Avenue South), New York",
+    "lat": 40.739103,
+    "lng": -73.989047,
+    "cuisine": "Italian",
+    "url": "https://www.rezdora.nyc",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.2
+  },
+  {
+    "rank": 30,
+    "name": "Ernesto's",
+    "slug": "ernesto-s",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "259 E Broadway, New York, NY",
+    "full_address": "259 E Broadway, New York, NY, 10002, US",
+    "lat": 40.714314,
+    "lng": -73.985437,
+    "cuisine": "Spanish",
+    "url": "http://www.ernestosnyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 31,
+    "name": "L'Accolade",
+    "slug": "laccolade",
+    "location": null,
+    "city": null,
+    "neighborhood": "Soho",
+    "address": "Soho, 302 Bleeker Street",
+    "full_address": "Soho, 302 Bleeker Street",
+    "lat": 40.732466,
+    "lng": -74.003862,
+    "cuisine": "French",
+    "url": "http://www.accolade-ny.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 32,
+    "name": "Cafe Commerce",
+    "slug": "cafe-commerce",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "964 Lexington Ave, New York, NY",
+    "full_address": "964 Lexington Ave, New York, NY 10021",
+    "lat": 40.769385560774,
+    "lng": -73.963142490929,
+    "cuisine": "French",
+    "url": "http://cafecommercenyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 33,
+    "name": "A&A Bake Doubles and Roti",
+    "slug": "a-a-bake-doubles-and-roti",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "1337 Fulton Street, Brooklyn, NY",
+    "full_address": "1337 Fulton Street, Brooklyn, NY 11216",
+    "lat": 40.680507,
+    "lng": -73.947952,
+    "cuisine": "Caribbean",
+    "url": "https://www.aandabakedoublesandrotishop.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.7
+  },
+  {
+    "rank": 34,
+    "name": "Al Badawi",
+    "slug": "al-badawi",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "151 Atlantic Ave, Brooklyn, NY",
+    "full_address": "151 Atlantic Ave, Brooklyn, NY, 11201, US",
+    "lat": 40.690639131093,
+    "lng": -73.994951394384,
+    "cuisine": "Mediterranean",
+    "url": "http://www.albadawinyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 35,
+    "name": "Leland Eating and Drinking House",
+    "slug": "leland-eating-and-drinking-house",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Prospect Heights",
+    "address": "755 Washington Avenue, Brooklyn",
+    "full_address": "755 Washington Avenue, Brooklyn",
+    "lat": 40.6724731896,
+    "lng": -73.9774704074,
+    "cuisine": "Mediterranean",
+    "url": "https://lelandbrooklyn.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 36,
+    "name": "Lysée",
+    "slug": "lysee",
+    "location": null,
+    "city": null,
+    "neighborhood": "Gramercy Park",
+    "address": "44 East 21st Street",
+    "full_address": "44 East 21st Street",
+    "lat": 40.7390904,
+    "lng": -73.9882476,
+    "cuisine": "Dessert",
+    "url": "https://www.lyseenyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 37,
+    "name": "Market Table",
+    "slug": "market-table",
+    "location": null,
+    "city": null,
+    "neighborhood": "West Village",
+    "address": "West Village, 54 Carmine Street",
+    "full_address": "West Village, 54 Carmine Street",
+    "lat": 40.729729,
+    "lng": -74.003717,
+    "cuisine": "American",
+    "url": "https://www.markettablenyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 38,
+    "name": "Boro Brine",
+    "slug": "boro-brine",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Williamsburg",
+    "address": "98 Berry Street, Brooklyn",
+    "full_address": "98 Berry Street, Brooklyn",
+    "lat": 40.7109776552,
+    "lng": -73.9642076033,
+    "cuisine": "Seafood",
+    "url": "https://www.borobrine.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 39,
+    "name": "Il Cantinori",
+    "slug": "il-cantinori",
+    "location": null,
+    "city": null,
+    "neighborhood": "Greenwich Village",
+    "address": "Greenwich Village, 32 East 10th Street",
+    "full_address": "Greenwich Village, 32 East 10th Street",
+    "lat": 40.732233,
+    "lng": -73.993171,
+    "cuisine": "Italian",
+    "url": "http://www.ilcantinori.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 40,
+    "name": "Maison Premiere",
+    "slug": "maison-premiere",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "298 Bedford Ave (btwn S 1st & Grand St), Brooklyn",
+    "full_address": "298 Bedford Ave (btwn S 1st & Grand St), Brooklyn",
+    "lat": 40.714251958166,
+    "lng": -73.961598125269,
+    "cuisine": "Seafood",
+    "url": "http://maisonpremiere.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 41,
+    "name": "Adda",
+    "slug": "adda",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "107 1st Avenue, New York, New York",
+    "full_address": "107 1st Avenue, New York, New York 10003",
+    "lat": 40.726847,
+    "lng": -73.986228,
+    "cuisine": "Indian",
+    "url": "https://addanyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 42,
+    "name": "Noreetuh",
+    "slug": "noreetuh",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "East Village, 128 First Avenue (at St Marks Place)",
+    "full_address": "East Village, 128 First Avenue (at St Marks Place)",
+    "lat": 40.727319,
+    "lng": -73.985262,
+    "cuisine": "Hawaiian",
+    "url": "http://noreetuh.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 43,
+    "name": "Gallaghers Steakhouse",
+    "slug": "gallaghers-steakhouse",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "228 W 52nd St, New York, NY",
+    "full_address": "228 W 52nd St, New York, NY, 10019, US",
+    "lat": 40.762797,
+    "lng": -73.98391,
+    "cuisine": "American",
+    "url": "http://gallaghersnysteakhouse.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.6
+  },
+  {
+    "rank": 44,
+    "name": "Hamburger America",
+    "slug": "hamburger-america",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "155 West Houston Street, New York, NY",
+    "full_address": "155 West Houston Street, New York, NY 10012",
+    "lat": 40.728048859582,
+    "lng": -74.002431091649,
+    "cuisine": "American",
+    "url": "https://hamburgeramerica.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 45,
+    "name": "Doughnut Plant",
+    "slug": "doughnut-plant",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "379 Grand St (at Norfolk St), New York",
+    "full_address": "379 Grand St (at Norfolk St), New York",
+    "lat": 40.716286,
+    "lng": -73.988523,
+    "cuisine": "Donuts",
+    "url": "https://www.doughnutplant.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 46,
+    "name": "Samurai Mama",
+    "slug": "samurai-mama",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "205 Grand St (btwn Bedford & Driggs Ave), Brooklyn",
+    "full_address": "205 Grand St (btwn Bedford & Driggs Ave), Brooklyn",
+    "lat": 40.714217,
+    "lng": -73.96008,
+    "cuisine": "Japanese",
+    "url": "http://samuraimama.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 47,
+    "name": "La Piraña Lechonera",
+    "slug": "la-pirana-lechonera",
+    "location": "The Bronx",
+    "city": "The Bronx",
+    "neighborhood": null,
+    "address": "766 East 152nd Street, The Bronx, NY",
+    "full_address": "766 East 152nd Street, The Bronx, NY, 10455",
+    "lat": 40.815487,
+    "lng": -73.906484,
+    "cuisine": "Caribbean",
+    "url": "http://lechoneralapirana.site",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 48,
+    "name": "Family Meal at Blue Hill",
+    "slug": "family-meal-at-blue-hill",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "75 Washington Pl (at 6th Ave), New York",
+    "full_address": "75 Washington Pl (at 6th Ave), New York",
+    "lat": 40.732078,
+    "lng": -73.999661,
+    "cuisine": "American",
+    "url": "https://www.bluehillfarm.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 49,
+    "name": "Txikito",
+    "slug": "txikito",
+    "location": null,
+    "city": null,
+    "neighborhood": "West Chelsea",
+    "address": "West Chelsea, 240 Ninth Avenue",
+    "full_address": "West Chelsea, 240 Ninth Avenue",
+    "lat": 40.747379,
+    "lng": -74.000362,
+    "cuisine": "Tapas",
+    "url": "http://www.txikitonyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 50,
+    "name": "Dim Sum Chelsea",
+    "slug": "dim-sum-chelsea",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "236 8th Ave (W. 22nd Street), New York",
+    "full_address": "236 8th Ave (W. 22nd Street), New York",
+    "lat": 40.744592,
+    "lng": -73.998637,
+    "cuisine": "Dim Sum",
+    "url": "https://www.dimsumchelsea.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 51,
+    "name": "Makina Cafe",
+    "slug": "makina-cafe",
+    "location": "Queens",
+    "city": "Queens",
+    "neighborhood": "Sunnyside",
+    "address": "43-38 44th Street, Queens",
+    "full_address": "43-38 44th Street, Queens",
+    "lat": 40.7470973721,
+    "lng": -73.9176453236,
+    "cuisine": "Ethiopian",
+    "url": "https://makinacafenyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 52,
+    "name": "Folk",
+    "slug": "folk",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Windsor Terrace",
+    "address": "1621 10th Avenue, Brooklyn",
+    "full_address": "1621 10th Avenue, Brooklyn",
+    "lat": 40.6607520615,
+    "lng": -73.9903933607,
+    "cuisine": "American",
+    "url": "http://www.folkbrooklyn.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 53,
+    "name": "Lillo",
+    "slug": "lillo",
+    "location": null,
+    "city": null,
+    "neighborhood": null,
+    "address": null,
+    "full_address": null,
+    "lat": 40.690236045369,
+    "lng": -73.996343712321,
+    "cuisine": "Italian",
+    "url": "http://lillobrooklyn.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 54,
+    "name": "Carnitas Ramirez",
+    "slug": "carnitas-ramirez",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "210 East 3rd Street, New York, New York",
+    "full_address": "210 East 3rd Street, New York, New York 10009",
+    "lat": 40.722524393686,
+    "lng": -73.982844154342,
+    "cuisine": "Mexican",
+    "url": "https://www.carnitasramirez.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 55,
+    "name": "Hungry Thirsty",
+    "slug": "hungry-thirsty",
+    "location": null,
+    "city": null,
+    "neighborhood": null,
+    "address": null,
+    "full_address": null,
+    "lat": 40.677968,
+    "lng": -73.996101,
+    "cuisine": "Thai",
+    "url": "https://www.hungrythirstynyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 56,
+    "name": "Marlow East",
+    "slug": "marlow-east",
+    "location": null,
+    "city": null,
+    "neighborhood": "Upper East Side",
+    "address": "Upper East Side, 1022 Lexington Avenue (at 73rd Street)",
+    "full_address": "Upper East Side, 1022 Lexington Avenue (at 73rd Street)",
+    "lat": 40.771072,
+    "lng": -73.961958,
+    "cuisine": "American",
+    "url": "https://www.marloweast.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 57,
+    "name": "Kansha",
+    "slug": "kansha",
+    "location": null,
+    "city": null,
+    "neighborhood": "Upper East Side",
+    "address": "Upper East Side, 1312 Madison Avenue (at 93rd Street)",
+    "full_address": "Upper East Side, 1312 Madison Avenue (at 93rd Street)",
+    "lat": 40.785265,
+    "lng": -73.955837,
+    "cuisine": "Japanese",
+    "url": "http://kanshanyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 58,
+    "name": "Okonomi",
+    "slug": "okonomi",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "150 Ainslie St (btwn Leonard & Lorimer St), Brooklyn",
+    "full_address": "150 Ainslie St (btwn Leonard & Lorimer St), Brooklyn",
+    "lat": 40.712548,
+    "lng": -73.94876,
+    "cuisine": "Japanese",
+    "url": "https://www.okonomi.us",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 59,
+    "name": "Kelang",
+    "slug": "kelang",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Greenpoint",
+    "address": "180 Nassau Avenue, Brooklyn",
+    "full_address": "180 Nassau Avenue, Brooklyn",
+    "lat": 40.7261598809,
+    "lng": -73.9523474345,
+    "cuisine": "Malaysian",
+    "url": "http://www.kelangnyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 60,
+    "name": "Wayla",
+    "slug": "wayla",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "100 Forsyth St (btw Grand & Broome), New York",
+    "full_address": "100 Forsyth St (btw Grand & Broome), New York",
+    "lat": 40.718256035223,
+    "lng": -73.992638492022,
+    "cuisine": "Thai",
+    "url": "https://www.waylanyc.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 61,
+    "name": "Chambers",
+    "slug": "chambers",
+    "location": null,
+    "city": null,
+    "neighborhood": "Tribeca",
+    "address": "Tribeca, 94 Chambers Street",
+    "full_address": "Tribeca, 94 Chambers Street",
+    "lat": 40.714553832409,
+    "lng": -74.007570349615,
+    "cuisine": "American",
+    "url": "http://chambers.nyc",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 62,
+    "name": "Abuqir",
+    "slug": "abuqir",
+    "location": "Queens",
+    "city": "Astoria",
+    "neighborhood": null,
+    "address": "2419 Steinway St, Astoria, NY",
+    "full_address": "2419 Steinway St, Astoria, NY, 11103, US",
+    "lat": 40.768445027419,
+    "lng": -73.910988948266,
+    "cuisine": "Seafood",
+    "url": "https://abuqirny.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.5
+  },
+  {
+    "rank": 63,
+    "name": "Swoony's",
+    "slug": "swoonys",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Carroll Gardens",
+    "address": "Carroll Gardens, 215 Columbia Street, Brooklyn",
+    "full_address": "Carroll Gardens, 215 Columbia Street, Brooklyn",
+    "lat": 40.684676,
+    "lng": -74.002553,
+    "cuisine": "American",
+    "url": "http://swoonys.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 64,
+    "name": "LenLen",
+    "slug": "lenlen",
+    "location": null,
+    "city": null,
+    "neighborhood": "Flatiron District",
+    "address": "Flatiron District, 40 East 20th Street",
+    "full_address": "Flatiron District, 40 East 20th Street",
+    "lat": 40.738453823486,
+    "lng": -73.988611239003,
+    "cuisine": "Thai",
+    "url": "https://lenlen.nyc",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 65,
+    "name": "Lei",
+    "slug": "lei",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "15 - 17 Doyers St, New York, NY",
+    "full_address": "15 - 17 Doyers St, New York, NY, 10013, US",
+    "lat": 40.714594987554,
+    "lng": -73.998267023823,
+    "cuisine": "Chinese",
+    "url": "https://www.leiwine.nyc",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 66,
+    "name": "Cove",
+    "slug": "cove",
+    "location": null,
+    "city": null,
+    "neighborhood": "Hudson Square",
+    "address": "105 Hudson Street",
+    "full_address": "105 Hudson Street",
+    "lat": 40.719496179707,
+    "lng": -74.008995440793,
+    "cuisine": "American",
+    "url": "https://www.cove-nyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 67,
+    "name": "Chama Mama",
+    "slug": "chama-mama",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "149 West 14th Street, Manhattan, NY",
+    "full_address": "149 West 14th Street, Manhattan, NY, 10011",
+    "lat": 40.738425,
+    "lng": -73.998897,
+    "cuisine": "Georgian",
+    "url": "https://www.chamamama.com/location/chama-mama/",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 68,
+    "name": "Freemans",
+    "slug": "freemans",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "1 Freeman Aly (at Rivington St), New York",
+    "full_address": "1 Freeman Aly (at Rivington St), New York",
+    "lat": 40.72206,
+    "lng": -73.992438,
+    "cuisine": "American",
+    "url": "http://www.freemansrestaurant.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 69,
+    "name": "ARIARI",
+    "slug": "ariari",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "119 First Avenue",
+    "full_address": "119 First Avenue",
+    "lat": 40.7272531,
+    "lng": -73.9858155,
+    "cuisine": "Korean",
+    "url": "https://ariarinyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 70,
+    "name": "Hyderabadi Zaiqa",
+    "slug": "hyderabadi-zaiqa",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "184 Lexington Avenue, New York, New York",
+    "full_address": "184 Lexington Avenue, New York, New York 10016",
+    "lat": 40.744877336894,
+    "lng": -73.981170958831,
+    "cuisine": "Indian",
+    "url": "https://hyderabadizaiqalexington.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 71,
+    "name": "Thirteen Water",
+    "slug": "thirteen-water",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "East Village, 208 East 7th Street",
+    "full_address": "East Village, 208 East 7th Street",
+    "lat": 40.724305,
+    "lng": -73.979977,
+    "cuisine": "Japanese",
+    "url": "http://thirteenwater.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 72,
+    "name": "Borgo",
+    "slug": "borgo",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "124 E 27th St, New York, NY",
+    "full_address": "124 E 27th St, New York, NY, 10016, US",
+    "lat": 40.742087,
+    "lng": -73.983583,
+    "cuisine": "Italian",
+    "url": "https://borgonyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 73,
+    "name": "Quique Crudo",
+    "slug": "quique-crudo",
+    "location": null,
+    "city": null,
+    "neighborhood": "West Village",
+    "address": "West Village, 27 Bedford Street",
+    "full_address": "West Village, 27 Bedford Street",
+    "lat": 40.729155,
+    "lng": -74.00374,
+    "cuisine": "Peruvian",
+    "url": "https://www.quiquecrudonyc.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 74,
+    "name": "Uncle Ray's Chicken Rice",
+    "slug": "uncle-rays-chicken-rice",
+    "location": null,
+    "city": null,
+    "neighborhood": "Hell's Kitchen",
+    "address": "842 Tenth Avenue",
+    "full_address": "842 Tenth Avenue",
+    "lat": 40.7649093,
+    "lng": -73.9875422,
+    "cuisine": "Singaporean",
+    "url": "https://www.unclerayschickenrice.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 75,
+    "name": "Stars",
+    "slug": "stars",
+    "location": null,
+    "city": null,
+    "neighborhood": "East Village",
+    "address": "167 First Avenue",
+    "full_address": "167 First Avenue",
+    "lat": 40.7321753,
+    "lng": -73.9883101,
+    "cuisine": "American",
+    "url": "https://www.stars-ny.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 76,
+    "name": "La Sirène",
+    "slug": "la-sirene",
+    "location": null,
+    "city": null,
+    "neighborhood": "Upper West Side",
+    "address": "Upper West Side, 416 Amsterdam Avenue (at 80th Street)",
+    "full_address": "Upper West Side, 416 Amsterdam Avenue (at 80th Street)",
+    "lat": 40.783864879414,
+    "lng": -73.978213488114,
+    "cuisine": "French",
+    "url": "http://lasirenenyc.com/uws",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 77,
+    "name": "Ambassadors Clubhouse",
+    "slug": "ambassadors-clubhouse",
+    "location": null,
+    "city": null,
+    "neighborhood": "NoMad",
+    "address": "1170 Broadway",
+    "full_address": "1170 Broadway",
+    "lat": 40.7476249613,
+    "lng": -73.9885961326,
+    "cuisine": "North Indian",
+    "url": "https://ambassadorsclubhouse.com/newyork/",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 78,
+    "name": "Il Leone",
+    "slug": "il-leone",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Park Slope",
+    "address": "166 Fifth Avenue, Brooklyn",
+    "full_address": "166 Fifth Avenue, Brooklyn",
+    "lat": 40.67765626383,
+    "lng": -73.979705703519,
+    "cuisine": "Italian",
+    "url": "https://illeone.me",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 79,
+    "name": "Bistrot Ha",
+    "slug": "bistrot-ha",
+    "location": null,
+    "city": null,
+    "neighborhood": "Lower East Side",
+    "address": "164 Orchard Street",
+    "full_address": "164 Orchard Street",
+    "lat": 40.7189871386,
+    "lng": -73.9923171703,
+    "cuisine": "French Vietnamese",
+    "url": null,
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 80,
+    "name": "Sky Pavilion",
+    "slug": "sky-pavilion",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "325 West 42nd Street, New York, New York",
+    "full_address": "325 West 42nd Street, New York, New York 10036",
+    "lat": 40.757983,
+    "lng": -73.990813,
+    "cuisine": "Chinese",
+    "url": "https://www.skypavilionnyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 81,
+    "name": "Filé Gumbo Bar",
+    "slug": "file-gumbo-bar",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "275 Church St, New York, NY",
+    "full_address": "275 Church St, New York, NY, 10013, US",
+    "lat": 40.718527,
+    "lng": -74.004899,
+    "cuisine": "American",
+    "url": "http://www.filenyc.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 82,
+    "name": "Tera",
+    "slug": "tera",
+    "location": null,
+    "city": null,
+    "neighborhood": "Lower East Side",
+    "address": "3 Allen Street",
+    "full_address": "3 Allen Street",
+    "lat": 40.7166095172,
+    "lng": -73.9896412461,
+    "cuisine": "Korean",
+    "url": "http://www.tera.nyc",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 83,
+    "name": "Mommy Pai's",
+    "slug": "mommy-pais",
+    "location": null,
+    "city": null,
+    "neighborhood": "Nolita",
+    "address": "Nolita, 203 Mott Street",
+    "full_address": "Nolita, 203 Mott Street",
+    "lat": 40.721482355484,
+    "lng": -73.995661006307,
+    "cuisine": "Thai",
+    "url": "http://mommypai.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 84,
+    "name": "Border Town",
+    "slug": "border-town",
+    "location": null,
+    "city": null,
+    "neighborhood": "Chinatown",
+    "address": "24 Henry Street",
+    "full_address": "24 Henry Street",
+    "lat": 40.712730056007,
+    "lng": -73.996660129166,
+    "cuisine": "Chinese",
+    "url": "http://bordertown.co",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 85,
+    "name": "Insa",
+    "slug": "insa",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "328 Douglass St (3rd Ave and 4th Ave), Gowanus",
+    "full_address": "328 Douglass St (3rd Ave and 4th Ave), Gowanus",
+    "lat": 40.67943,
+    "lng": -73.982684,
+    "cuisine": "Korean",
+    "url": "http://www.insabrooklyn.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.3
+  },
+  {
+    "rank": 86,
+    "name": "Beauty & Essex",
+    "slug": "beauty-essex",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "146 Essex St (btwn Stanton & Rivington St), New York",
+    "full_address": "146 Essex St (btwn Stanton & Rivington St), New York",
+    "lat": 40.720414,
+    "lng": -73.986887,
+    "cuisine": "Tapas",
+    "url": "https://beautyandessex.com/new-york/",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.4
+  },
+  {
+    "rank": 87,
+    "name": "Zaab Zaab",
+    "slug": "zaab-zaab",
+    "location": "Queens",
+    "city": "Elmhurst",
+    "neighborhood": null,
+    "address": "7604 Woodside Ave, Elmhurst, NY",
+    "full_address": "7604 Woodside Ave, Elmhurst, NY, 11373, US",
+    "lat": 40.743261,
+    "lng": -73.888639,
+    "cuisine": "Thai",
+    "url": "https://zaabzaabnyc.com/zaabzaabwoodside",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 88,
+    "name": "Mắm",
+    "slug": "mam",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "70 Forsyth Street, New York, New York",
+    "full_address": "70 Forsyth Street, New York, New York 10002",
+    "lat": 40.717043,
+    "lng": -73.9934,
+    "cuisine": "Vietnamese",
+    "url": null,
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 89,
+    "name": "Nepali Bhanchha Ghar",
+    "slug": "nepali-bhanchha-ghar",
+    "location": "Queens",
+    "city": "Queens",
+    "neighborhood": null,
+    "address": "74-15 Roosevelt Avenue, Queens, New York",
+    "full_address": "74-15 Roosevelt Avenue, Queens, New York 11372",
+    "lat": 40.747039323089,
+    "lng": -73.890825358169,
+    "cuisine": "Nepalese",
+    "url": "https://www.bhanchhagharny.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 90,
+    "name": "Croft Alley",
+    "slug": "croft-alley",
+    "location": null,
+    "city": null,
+    "neighborhood": null,
+    "address": null,
+    "full_address": null,
+    "lat": 40.727201118473,
+    "lng": -74.003135317007,
+    "cuisine": "American",
+    "url": "https://www.croftalley.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": null
+  },
+  {
+    "rank": 91,
+    "name": "Popina",
+    "slug": "popina",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": "Cobble Hill",
+    "address": "127 Columbia Street, Brooklyn",
+    "full_address": "127 Columbia Street, Brooklyn",
+    "lat": 40.6873468,
+    "lng": -74.0016449,
+    "cuisine": "Italian",
+    "url": "http://popinanyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.1
+  },
+  {
+    "rank": 92,
+    "name": "Maman",
+    "slug": "maman",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "239 Centre St (btwn Broome & Grand St), New York",
+    "full_address": "239 Centre St (btwn Broome & Grand St), New York",
+    "lat": 40.720233,
+    "lng": -73.998324,
+    "cuisine": "Café",
+    "url": "https://mamannyc.com/locations/soho",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4.2
+  },
+  {
+    "rank": 93,
+    "name": "The Corner Store",
+    "slug": "the-corner-store",
+    "location": null,
+    "city": null,
+    "neighborhood": "SoHo",
+    "address": "SoHo, 475 West Broadway",
+    "full_address": "SoHo, 475 West Broadway",
+    "lat": 40.726569,
+    "lng": -73.999808,
+    "cuisine": "American",
+    "url": "https://www.thecornerstoresoho.com",
+    "sources": [
+      "winechef"
+    ],
+    "google_rating": 4
+  },
+  {
+    "rank": 94,
+    "name": "Grand Central Oyster Bar",
+    "slug": "grand-central-oyster-bar",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "89 East 42nd Street, Manhattan, NY",
+    "full_address": "89 East 42nd Street, Manhattan, NY, 10017",
+    "lat": 40.752718,
+    "lng": -73.977251,
+    "cuisine": "Seafood",
+    "url": "http://www.oysterbarny.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4.3
+  },
+  {
+    "rank": 95,
+    "name": "Peking Duck House",
+    "slug": "peking-duck-house",
+    "location": null,
+    "city": null,
+    "neighborhood": "Chinatown",
+    "address": "28 Mott Street",
+    "full_address": "28 Mott Street",
+    "lat": 40.71465,
+    "lng": -73.99872,
+    "cuisine": "Chinese",
+    "url": "http://www.pekingduckhousenyc.com",
+    "sources": [
+      "resy"
+    ],
+    "google_rating": 4.3
+  },
+  {
+    "rank": 96,
+    "name": "Kings Co Imperial",
+    "slug": "kings-co-imperial",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "20 Skillman Ave (btwn Union Ave & Lorimer St), Brooklyn",
+    "full_address": "20 Skillman Ave (btwn Union Ave & Lorimer St), Brooklyn",
+    "lat": 40.715244794598,
+    "lng": -73.950990240067,
+    "cuisine": "Chinese",
+    "url": "https://www.kingscoimperial.com/location/kings-co-imperial-williamsburg/",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4
+  },
+  {
+    "rank": 97,
+    "name": "Suzume",
+    "slug": "suzume",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "545 Lorimer St (at Devoe St), Brooklyn",
+    "full_address": "545 Lorimer St (at Devoe St), Brooklyn",
+    "lat": 40.713195586909,
+    "lng": -73.949423159449,
+    "cuisine": "Ramen",
+    "url": "http://www.suzumebk.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4
+  },
+  {
+    "rank": 98,
+    "name": "Buvette",
+    "slug": "buvette",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "42 Grove St (btwn Bedford & Bleecker St), New York",
+    "full_address": "42 Grove St (btwn Bedford & Bleecker St), New York",
+    "lat": 40.732709,
+    "lng": -74.004327,
+    "cuisine": "French",
+    "url": "http://www.ilovebuvette.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4
+  },
+  {
+    "rank": 99,
+    "name": "The Commodore",
+    "slug": "the-commodore",
+    "location": "Brooklyn",
+    "city": "Brooklyn",
+    "neighborhood": null,
+    "address": "366 Metropolitan Ave (at Havemeyer St), Brooklyn",
+    "full_address": "366 Metropolitan Ave (at Havemeyer St), Brooklyn",
+    "lat": 40.713898,
+    "lng": -73.9558,
+    "cuisine": "American",
+    "url": "https://www.thecommodorebrooklyn.com",
+    "sources": [
+      "foursquare"
+    ],
+    "google_rating": 4
+  },
+  {
+    "rank": 100,
+    "name": "Noz Market",
+    "slug": "noz-market",
+    "location": "Manhattan",
+    "city": "New York",
+    "neighborhood": null,
+    "address": "1374 3rd Ave, New York, NY",
+    "full_address": "1374 3rd Ave, New York, NY, 10075, US",
+    "lat": 40.773808,
+    "lng": -73.957949,
+    "cuisine": "Japanese",
+    "url": "https://www.nozmarket.com",
+    "sources": [
+      "eater"
+    ],
+    "google_rating": 4
+  }
+]
