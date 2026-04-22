@@ -1858,6 +1858,7 @@ async function handleDeleteList() {
     alert('Delete failed: ' + error.message);
     return;
   }
+  if (newListDialog.open) newListDialog.close('cancel');
   history.pushState({}, '', '/');
   applyRoute(parseRoute());
 }
@@ -1904,19 +1905,30 @@ const newListDialog = document.getElementById('new-list-dialog');
 const newListBody = document.getElementById('new-list-body');
 /** Cleared when the list modal body is re-rendered. */
 let listModalNameBlurTimer = null;
+/** Set while create/edit list modal is mounted; used for backdrop / Escape / Cancel close guard. */
+let listModalTryClose = null;
 
 function disposeListDataEditor() {
   if (listModalNameBlurTimer != null) {
     clearTimeout(listModalNameBlurTimer);
     listModalNameBlurTimer = null;
   }
+  listModalTryClose = null;
 }
 
 /** Aborted each time the create/edit list modal body is re-rendered so outside-click closes only one listener. */
 let newListPlaceSearchOutsideAbort = null;
 
 newListDialog.addEventListener('click', (e) => {
-  if (e.target === newListDialog) newListDialog.close('cancel');
+  if (e.target !== newListDialog) return;
+  if (listModalTryClose) void listModalTryClose();
+  else newListDialog.close('cancel');
+});
+
+newListDialog.addEventListener('cancel', (e) => {
+  e.preventDefault();
+  if (listModalTryClose) void listModalTryClose();
+  else newListDialog.close('cancel');
 });
 
 function slugify(input) {
@@ -2570,6 +2582,7 @@ async function renderListDialog({ mode, list = null, items = [] }) {
   const form = newListBody.querySelector('#new-list-form');
   const nameInput = newListBody.querySelector('#list-name');
   const slugInput = newListBody.querySelector('#list-slug');
+  const initialSlugWhenOpened = slugInput.value.trim();
   const slugStatusEl = newListBody.querySelector('#list-slug-status');
   const slugPreviewEl = newListBody.querySelector('#list-slug-preview');
   const summary = newListBody.querySelector('#parse-summary');
@@ -2606,14 +2619,10 @@ async function renderListDialog({ mode, list = null, items = [] }) {
     slugPreviewEl.textContent = s ? `Slug: list/${s}` : 'Slug: list/…';
   }
 
-  cancelBtn.addEventListener('click', () => newListDialog.close('cancel'));
-
   const deleteBtn = newListBody.querySelector('#delete-list');
   if (deleteBtn) {
-    deleteBtn.addEventListener('click', async () => {
-      // Close the edit modal first so the confirm dialog stacks cleanly on top.
-      newListDialog.close('cancel');
-      await handleDeleteList();
+    deleteBtn.addEventListener('click', () => {
+      void handleDeleteList();
     });
   }
 
@@ -2868,6 +2877,33 @@ async function renderListDialog({ mode, list = null, items = [] }) {
   const placeQ = newListBody.querySelector('#place-search-q');
   const placeStatus = newListBody.querySelector('#place-search-status');
   const placeUl = newListBody.querySelector('#place-search-results');
+
+  function isListFormDirty() {
+    const nameDirty = nameInput.value.trim() !== initialNameTrim;
+    const locationsDirty = itemsInput.value !== initialJson;
+    const slugDirty = slugInput.value.trim() !== initialSlugWhenOpened;
+    const placeSearchDirty = (placeQ?.value || '').trim().length > 0;
+    return nameDirty || locationsDirty || slugDirty || placeSearchDirty;
+  }
+
+  async function tryCloseListDialog() {
+    if (!isListFormDirty()) {
+      newListDialog.close('cancel');
+      return;
+    }
+    const ok = await confirmDialog({
+      message: 'You have unsaved changes in this list. Close without saving?',
+      confirmLabel: 'Discard changes',
+      cancelLabel: 'Keep editing',
+    });
+    if (ok) newListDialog.close('cancel');
+  }
+
+  cancelBtn.addEventListener('click', () => {
+    void tryCloseListDialog();
+  });
+
+  listModalTryClose = tryCloseListDialog;
 
   let placeSearchGen = 0;
   let placeSearchDebounce = null;
