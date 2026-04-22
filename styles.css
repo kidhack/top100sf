@@ -361,6 +361,26 @@ tr:not(.visited) button.heart {
 }
 .leaflet-control-zoom-in { border-radius: 4px 4px 0 0; }
 .leaflet-control-zoom-out { border-radius: 0 0 4px 4px; }
+.leaflet-control-locate-wrap { border-radius: 4px; overflow: hidden; }
+.leaflet-control-locate-me {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #fff;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+  font: inherit;
+}
+.leaflet-control-locate-me:hover { background: var(--hover); }
+.leaflet-control-locate-me:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
 .leaflet-control-attribution {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
@@ -387,6 +407,22 @@ tr:not(.visited) button.heart {
 }
 .pin.selected.hearted {
   border-color: #e11d48;
+}
+
+/* Current location (Locate me) — iOS-style blue dot above list pins */
+.user-location-marker {
+  background: transparent !important;
+  border: none !important;
+}
+.user-location-dot {
+  width: 18px;
+  height: 18px;
+  margin: 2px;
+  border-radius: 50%;
+  background: #007aff;
+  border: 3px solid #fff;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .view-banner {
@@ -985,10 +1021,11 @@ textarea.list-items-textarea {
   gap: 6px;
 }
 .all-lists-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 12px;
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -999,20 +1036,23 @@ textarea.list-items-textarea {
 }
 .all-lists-row:hover { background: var(--hover); }
 .all-lists-row[hidden] { display: none; }
-.all-lists-row .all-lists-name { font-weight: 500; font-size: 14px; }
-.all-lists-row .all-lists-owner { font-size: 12px; color: var(--fg-dim); }
-.all-lists-row .all-lists-count { font-size: 12px; color: var(--fg-dim); }
-.all-lists-row .all-lists-stats {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  text-align: right;
+.all-lists-row .all-lists-name {
+  font-weight: 500;
+  font-size: 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+.all-lists-row .all-lists-count { font-size: 12px; color: var(--fg-dim); }
 .all-lists-row .all-lists-progress {
   font-size: 12px;
   color: var(--fg-dim);
   font-weight: 500;
+  flex: 0 0 auto;
+  text-align: right;
+  white-space: nowrap;
 }
 .all-lists-row .all-lists-progress.has-progress {
   color: var(--visited);
@@ -1299,23 +1339,17 @@ textarea.list-items-textarea {
 }
 
 @media (max-width: 720px) {
-  .menu-shell[data-expanded="true"] {
-    min-width: 220px;
-    max-width: calc(100vw - 24px);
-  }
-  .menu-body { padding: 8px; gap: 4px; }
-  .menu-item { padding: 10px; font-size: 14px; }
-}
-
-@media (max-width: 720px) {
   html, body {
     overflow: hidden;
+    overflow-x: hidden;
     height: 100vh;
     height: 100dvh;
     max-height: 100vh;
     max-height: 100dvh;
+    touch-action: manipulation;
   }
   .app {
+    overflow-x: hidden;
     flex-direction: column;
     height: 100vh;
     height: 100dvh;
@@ -1331,14 +1365,13 @@ textarea.list-items-textarea {
     min-height: 0;
     width: 100%;
     border-bottom: 1px solid var(--border);
+    /* Room for menu/auth on the right + 12px gap before .info can end (see .info). */
+    --map-right-strip: min(200px, 46vw);
   }
   .map-auth,
   .view-banner {
     top: 12px;
-    /* Reserve space for the .info overlay on the left:
-       12px gutter + 174px outer width (150 + 24 padding) + 12px gap +
-       12px right gutter = 210px. */
-    max-width: calc(100% - 210px);
+    max-width: calc(100% - 12px - var(--map-right-strip));
   }
   .map-auth {
     gap: 4px;
@@ -1361,9 +1394,81 @@ textarea.list-items-textarea {
     min-width: 0;
     padding: 3px 6px;
   }
+  /* Signed-in menu open: one opaque panel like desktop .map-auth — outer #auth
+     is only a 12px-inset positioning wrapper (transparent); dim is ::before;
+     .menu-shell is the single white card (solid bg + 8px padding, same as desktop). */
+  .map-auth:has(.menu-shell[data-expanded="true"]) {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    min-width: 0;
+    z-index: 3500;
+    isolation: isolate;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: visible;
+    background: transparent;
+    pointer-events: none;
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"])::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"]) .menu-shell {
+    position: relative;
+    z-index: 0;
+    flex: 0 1 auto;
+    align-self: stretch;
+    min-height: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    max-height: calc(100svh - 12px - 12px - 16px);
+    margin: 0;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+    pointer-events: auto;
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"]) .menu-shell[data-expanded="true"] {
+    border-radius: 8px;
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"]) .menu-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px;
+    gap: 4px;
+  }
+  .map-auth:has(.menu-shell[data-expanded="true"]) .menu-item {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .menu-body { padding: 8px; gap: 4px; }
+  .menu-item { padding: 10px; font-size: 14px; }
   .info {
     top: 12px;
-    max-width: 150px;
+    width: fit-content;
+    max-width: calc(100% - 12px - var(--map-right-strip));
   }
   .list {
     flex: 1 1 0;
@@ -1373,7 +1478,82 @@ textarea.list-items-textarea {
     max-height: none;
     border-right: none;
   }
+  /* Overlay scrollbars don’t reserve a gutter; keep header width in sync with body. */
+  .list-head {
+    padding-right: 0;
+    box-shadow: none;
+  }
   .list-body {
     -webkit-overflow-scrolling: touch;
+  }
+  .leaflet-control-zoom {
+    display: none !important;
+  }
+  /* Browse: same “window” as open menu — only when [open] so we don’t override
+     dialog:not([open]) { display: none } and flash the panel on load. */
+  #all-lists-dialog.modal.modal-wide[open] {
+    box-sizing: border-box;
+    position: fixed;
+    inset: 12px;
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+  #all-lists-dialog.modal.modal-wide[open]::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  #all-lists-dialog.modal.modal-wide[open] .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    overflow: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    -webkit-overflow-scrolling: touch;
+    background: var(--bg);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    padding: 8px;
+    max-height: calc(100svh - 24px);
+  }
+  /* Create / edit list: full-bleed modal on small viewports (svh + safe-area). */
+  #new-list-dialog.modal.modal-wide[open] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    margin-top: env(safe-area-inset-top, 0px);
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #new-list-dialog.modal.modal-wide[open] .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  }
+  textarea.list-items-textarea {
+    max-height: none;
   }
 }

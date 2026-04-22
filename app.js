@@ -100,6 +100,36 @@ const visited = new Set();
 const hearted = new Set();
 let rowEls = {};
 let markers = {};
+/** @type {L.Marker | null} — “you are here” after a successful Locate me. */
+let userLocationMarker = null;
+/** Clears the blue dot if the user hasn’t tapped Locate me again within this window. */
+const USER_LOCATION_AUTO_HIDE_MS = 5 * 60 * 1000;
+let userLocationHideTimer = null;
+
+function clearUserLocationAutoHideTimer() {
+  if (userLocationHideTimer !== null) {
+    clearTimeout(userLocationHideTimer);
+    userLocationHideTimer = null;
+  }
+}
+
+function removeUserLocationMarkerFromMap(mapInstance) {
+  clearUserLocationAutoHideTimer();
+  if (userLocationMarker) {
+    if (mapInstance.hasLayer(userLocationMarker)) {
+      mapInstance.removeLayer(userLocationMarker);
+    }
+    userLocationMarker = null;
+  }
+}
+
+function scheduleUserLocationAutoHide(mapInstance) {
+  clearUserLocationAutoHideTimer();
+  userLocationHideTimer = setTimeout(() => {
+    userLocationHideTimer = null;
+    removeUserLocationMarkerFromMap(mapInstance);
+  }, USER_LOCATION_AUTO_HIDE_MS);
+}
 let current = null;
 // Monotonic token bumped on every applyRoute() call so background tasks
 // (e.g. geocode backfill) can detect stale state and bail out cleanly when
@@ -133,7 +163,85 @@ const map = L.map('map', {
   attributionControl: true,
 }).setView([37.78, -122.42], 11);
 
-L.control.zoom({ position: 'bottomright' }).addTo(map);
+const zoomControl = L.control.zoom({ position: 'bottomright' });
+
+/** Apple CoreSVG “location” asset (user-provided location.svg), inlined for the map control. */
+const locateMeSvg =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.2703 18.4783" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M0.833401 7.47647C-0.514255 8.10147-0.143161 9.90811 1.34121 9.91787L8.46035 9.94717C8.57754 9.94717 8.60684 9.97647 8.60684 10.0937L8.62637 17.1542C8.63614 18.6972 10.4721 18.9706 11.1264 17.5546L18.3432 2.03701C19.0072 0.591702 17.8744-0.433689 16.4389 0.240139ZM2.53262 8.39444C2.49356 8.39444 2.48379 8.35537 2.53262 8.33584L16.5658 1.91006C16.6342 1.88076 16.6635 1.9003 16.6342 1.97842L10.1693 16.0019C10.1596 16.0409 10.1205 16.0312 10.1205 15.9921L10.1693 9.0878C10.1693 8.65811 9.8666 8.35537 9.42715 8.35537Z"/></svg>';
+
+function updateUserLocationMarker(mapInstance, lat, lng) {
+  const latLng = L.latLng(lat, lng);
+  if (userLocationMarker) {
+    userLocationMarker.setLatLng(latLng);
+    userLocationMarker.bringToFront();
+    return;
+  }
+  const icon = L.divIcon({
+    className: 'user-location-marker',
+    html: '<div class="user-location-dot" aria-hidden="true"></div>',
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
+  });
+  userLocationMarker = L.marker(latLng, {
+    icon,
+    interactive: false,
+    keyboard: false,
+    zIndexOffset: 1000,
+  }).addTo(mapInstance);
+}
+
+function locateUserOnMap(mapInstance) {
+  if (!navigator.geolocation) {
+    console.warn('Geolocation is not supported in this browser.');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      updateUserLocationMarker(mapInstance, lat, lng);
+      mapInstance.flyTo([lat, lng], Math.max(mapInstance.getZoom(), 14), { duration: 0.6 });
+      scheduleUserLocationAutoHide(mapInstance);
+    },
+    (err) => {
+      console.warn('Could not get location', err.message || err.code);
+    },
+    { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 },
+  );
+}
+
+const LocateMeControl = L.Control.extend({
+  options: { position: 'bottomright' },
+  onAdd(mapInstance) {
+    const wrapper = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-locate-wrap');
+    const btn = L.DomUtil.create('button', 'leaflet-control-locate-me', wrapper);
+    btn.type = 'button';
+    btn.title = 'Locate me';
+    btn.setAttribute('aria-label', 'Locate me');
+    btn.innerHTML = locateMeSvg;
+    L.DomEvent.disableClickPropagation(wrapper);
+    L.DomEvent.on(btn, 'click', (e) => {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      locateUserOnMap(mapInstance);
+    });
+    return wrapper;
+  },
+});
+const locateMeControl = new LocateMeControl();
+
+function syncMapMobileControls() {
+  const mobile = window.matchMedia('(max-width: 720px)').matches;
+  if (mobile) {
+    if (zoomControl._map) map.removeControl(zoomControl);
+    if (!locateMeControl._map) locateMeControl.addTo(map);
+  } else {
+    if (locateMeControl._map) map.removeControl(locateMeControl);
+    if (!zoomControl._map) zoomControl.addTo(map);
+  }
+}
+syncMapMobileControls();
+window.matchMedia('(max-width: 720px)').addEventListener('change', syncMapMobileControls);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
@@ -432,7 +540,7 @@ function renderRows() {
       toggleVisited(r.rank);
     });
 
-    tr.addEventListener('click', () => select(r.rank));
+    tr.addEventListener('click', () => select(r.rank, { scrollList: false }));
     tbody.appendChild(tr);
     rowEls[r.rank] = tr;
   }
@@ -451,7 +559,7 @@ function addMarkerForRow(r) {
     iconAnchor: [7, 7],
   });
   const m = L.marker([r.lat, r.lng], { icon, title: `${r.rank}. ${r.name}` }).addTo(map);
-  m.on('click', () => select(r.rank));
+  m.on('click', () => select(r.rank, { scrollList: true }));
   markers[r.rank] = m;
 }
 
@@ -466,7 +574,18 @@ function pinEl(rank) {
   return m ? (m.getElement() && m.getElement().querySelector('.pin')) : null;
 }
 
-function select(rank) {
+/** Scroll only `.list-body` so the row sits near the top (map pin selection). */
+function scrollListRowIntoView(tr, padding = 4) {
+  if (!listBody || !tr) return;
+  const rowTop = tr.getBoundingClientRect().top;
+  const lbTop = listBody.getBoundingClientRect().top;
+  const nextTop = Math.max(0, listBody.scrollTop + (rowTop - lbTop) - padding);
+  listBody.scrollTo({ top: nextTop, behavior: 'smooth' });
+}
+
+/** @param {{ scrollList?: boolean }} [opts] — scrollList: scroll list pane (e.g. after map pin tap). */
+function select(rank, opts = {}) {
+  const { scrollList = false } = opts;
   const r = restaurants.find(x => x.rank === rank);
   if (!r) return;
   if (current !== null) {
@@ -478,7 +597,7 @@ function select(rank) {
   const row = rowEls[rank];
   if (row) {
     row.classList.add('selected');
-    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (scrollList) scrollListRowIntoView(row);
   }
   const pin = pinEl(rank);
   if (pin) pin.classList.add('selected');
@@ -1099,6 +1218,15 @@ async function applyRoute(nextRoute) {
     ? `Top100SF — ${DEFAULT_LIST_NAME}`
     : `${listMeta.name} · Top100SF`;
 
+  // After top-layer dialogs close or flex layout updates, Leaflet and the list
+  // scrollport can keep stale dimensions until the next frame / interaction.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      map.invalidateSize();
+      if (listBody) listBody.scrollTop = 0;
+    });
+  });
+
   // Fire-and-forget: fill in any missing coordinates for rows that have an
   // address. Uses the shared geocode_cache, so repeat visits are instant.
   backfillMissingCoordinates(myToken).catch(err => {
@@ -1262,6 +1390,10 @@ function showVisitedHint() {
     document.removeEventListener('pointerdown', hide, true);
     window.removeEventListener('resize', position);
     document.removeEventListener('scroll', position, true);
+    if (listBody) listBody.removeEventListener('scroll', onListScroll);
+  }
+  function onListScroll() {
+    hide();
   }
   function onPointer(e) {
     const el = e.target.closest && e.target.closest('.icon-btn');
@@ -1271,6 +1403,7 @@ function showVisitedHint() {
   document.addEventListener('pointerdown', hide, true);
   window.addEventListener('resize', position);
   document.addEventListener('scroll', position, true);
+  if (listBody) listBody.addEventListener('scroll', onListScroll, { passive: true });
   setTimeout(hide, 8000);
 }
 
@@ -3172,7 +3305,7 @@ async function renderListDialog({ mode, list = null, items = [] }) {
 // ---------------------------------------------------------------------------
 // All-lists directory (Phase 6)
 //
-// Shows up to 200 active lists with their owner's username and item count.
+// Shows up to 200 active lists with item count and per-user visit progress.
 // Sorted by aggregate visits (all users): each distinct (user_id, list venue
 // name_key) with a matching visited row counts once. Not shown in the UI.
 // When the viewer is signed in, also shows their own progress per list.
@@ -3190,7 +3323,7 @@ async function openAllListsDialog() {
       <h2 class="modal-title" id="all-lists-title">All lists</h2>
       <button type="button" class="modal-close-btn" id="all-lists-close" aria-label="Close">×</button>
     </div>
-    <input type="search" id="all-lists-search" class="all-lists-search" placeholder="Search lists or users…" autocomplete="off" spellcheck="false">
+    <input type="search" id="all-lists-search" class="all-lists-search" placeholder="Search lists…" autocomplete="off" spellcheck="false">
     <div class="all-lists-loading">Loading…</div>
   `;
   allListsDialog.showModal();
@@ -3397,13 +3530,8 @@ async function openAllListsDialog() {
       a.className = 'all-lists-row';
       a.href = href;
       a.innerHTML = `
-        <div>
-          <div class="all-lists-name">${escapeHtml(list.name)}</div>
-          <div class="all-lists-owner">${ownerUsername ? '@' + escapeHtml(ownerUsername) : 'unknown owner'}</div>
-        </div>
-        <div class="all-lists-stats">
-          <div class="all-lists-progress${myProgress > 0 ? ' has-progress' : ''}">${myProgress}/${itemCount} visited</div>
-        </div>
+        <div class="all-lists-name">${escapeHtml(list.name)}</div>
+        <div class="all-lists-progress${myProgress > 0 ? ' has-progress' : ''}">${myProgress}/${itemCount} visited</div>
       `;
       const itemNames = (namesByList.get(list.id) || []).map(e => e.name);
       const fallbackNames = isDefault && !itemNames.length
@@ -3412,9 +3540,16 @@ async function openAllListsDialog() {
       a.dataset.search = `${list.name} ${ownerUsername || ''} ${itemNames.join(' ')} ${fallbackNames.join(' ')}`.toLowerCase();
       a.addEventListener('click', (e) => {
         e.preventDefault();
+        const targetHref = href;
         allListsDialog.close('navigate');
-        history.pushState({}, '', href);
-        applyRoute(parseRoute());
+        // Wait until the modal top layer is gone and layout has settled; otherwise
+        // the list/map can paint with wrong geometry until the user interacts.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            history.pushState({}, '', targetHref);
+            void applyRoute(parseRoute());
+          });
+        });
       });
       grid.appendChild(a);
     }
